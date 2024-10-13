@@ -1,0 +1,149 @@
+@startuml SlowDancerModelArchitecture
+class GeneratingNoteList{
+    +List<Note> generateNote(Sound bgm)
+}
+class Notes{
+    float time
+    +GameObject noteImage
+}
+class NotesDataBase{
+    List<Notes> notesList
+}
+class PushingNotes{
+    +void pushNotes(List<Note> notes)
+}
+note top of PushingNotes
+    ノーツの生成方法よりこの辺りは変化する
+end note
+class DeletingNote{
+    +void missNote()
+    +void successNote()
+    +void deleteNote()
+}
+class calculationScore{
+    +int score
+    +int onGetCoin()
+    +int onGetCombo()
+}
+class comboing{
+    +int combo
+    +bool BooleanCombo()
+    +int countCombo()
+}
+class Walking{
+    bool isMoving()
+    void walk()
+    void jump()
+}
+class Running{
+    bool isRunning()
+    void run()
+    void jump()
+}
+class EnemyMovingController{
+    bool inMoving()
+    void walk()
+}
+class EnemyHP{
+    +int hp
+    +int takeDamage()
+}
+class PlayerHP{
+    +PlayerHP hp
+    +int takeDamage()
+    +int heal()
+}
+
+class Attacking{
+    +int attackPoint
+    +void specialAttack()
+    +void normalAttack()
+    +void punch()
+    +void kick()
+}
+class countering{
+    +int counterPoint
+    +void counter()
+}
+class Coin{
+    +int coinPoint
+    +GameObject coinImage
+}
+class CoinDataBase{
+    List<Coin> coinList
+}
+class GetingCoin{
+    +int resultCoin
+    +int currentCoin
+    +int getCoin()
+}
+class Cloth{
+    +GameObject ClothImage
+}
+class ClothDataBase{
+    List<Cloth> clothList 
+}
+class Weapon{
+    +GameObject WeaponImage
+}
+class WeaponDataBase{
+    List<Weapon> weaponList
+}
+class Enemy{
+    +EnemyHP hp
+    +int attackPoint
+    GameObject enemyImage
+    EnemyMovingController moving
+}
+class SelectingCloth{
+    Cloth currentCloth
+    +Cloth selectCloth()
+}
+class SelectingWeapon{
+    Weapon currentWeapon
+    +Weapon selectWeapon()
+}
+class EnemyDataBase{
+    List<Enemy> enemyList
+}
+interface IDamageable{
+    +void takeDamage()
+}
+interface IAttacking{
+    +void specialAttack()
+    +void normalAttack()
+}
+interface ISelectItemable{
+    +void selectItem()
+}
+interface IMoveable{
+    +void move()
+    +void jump()
+}
+GeneratingNoteList->NotesDataBase
+NotesDataBase->Notes
+PushingNotes->GeneratingNoteList
+Enemy<--EnemyDataBase
+Enemy-->EnemyMovingController
+Enemy-->EnemyHP
+EnemyHP..>IDamageable
+PlayerHP..>IDamageable
+EnemyHP-->Attacking
+EnemyHP-->countering
+SelectingCloth --> ClothDataBase
+SelectingWeapon-->WeaponDataBase
+Running..>IMoveable
+Walking..>IMoveable
+ClothDataBase"x..*" -- "*1"Cloth
+WeaponDataBase"x..*" -- "*1"Weapon
+calculationScore-->comboing
+calculationScore-->GetingCoin
+comboing-->DeletingNote
+DeletingNote-- Running
+DeletingNote-- Walking
+SelectingCloth..>ISelectItemable
+SelectingWeapon..>ISelectItemable
+Attacking..>IAttacking
+GetingCoin-->CoinDataBase
+CoinDataBase-->Coin
+@enduml
