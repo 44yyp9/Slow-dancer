@@ -31,11 +31,15 @@ class comboing{
     +int countCombo()
 }
 class Walking{
+    +float speed
+    +float jumpPower
     bool isMoving()
     void walk()
     void jump()
 }
 class Running{
+    +float speed
+    +float jumpPower
     bool isRunning()
     void run()
     void jump()
