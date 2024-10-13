@@ -81,10 +81,10 @@ class GetingCoin{
     +int currentCoin
     +int getCoin()
 }
-class Cloth{
+class Skin{
     +GameObject ClothImage
 }
-class ClothDataBase{
+class SkinDataBase{
     List<Cloth> clothList 
 }
 class Weapon{
@@ -99,7 +99,7 @@ class Enemy{
     GameObject enemyImage
     EnemyMovingController moving
 }
-class SelectingCloth{
+class SelectingSkin{
     Cloth currentCloth
     +Cloth selectCloth()
 }
@@ -109,6 +109,16 @@ class SelectingWeapon{
 }
 class EnemyDataBase{
     List<Enemy> enemyList
+}
+class GameOver{
+    +void gameOver()
+}
+class GameClear{
+    +void gameClear()
+}
+class CameraScrolling{
+    +Transform cameraPosition
+    +Transform cameraScroll()
 }
 interface IDamageable{
     +void takeDamage()
@@ -134,20 +144,21 @@ EnemyHP..>IDamageable
 PlayerHP..>IDamageable
 EnemyHP-->Attacking
 EnemyHP-->countering
-SelectingCloth --> ClothDataBase
-SelectingWeapon-->WeaponDataBase
+SelectingSkin --> SkinDataBase
+
 Running..>IMoveable
 Walking..>IMoveable
-ClothDataBase"x..*" -- "*1"Cloth
-WeaponDataBase"x..*" -- "*1"Weapon
+SkinDataBase"x..*" -- "*1"Skin
+
 calculationScore-->comboing
 calculationScore-->GetingCoin
 comboing-->DeletingNote
 DeletingNote-- Running
 DeletingNote-- Walking
-SelectingCloth..>ISelectItemable
-SelectingWeapon..>ISelectItemable
+SelectingSkin..>ISelectItemable
+
 Attacking..>IAttacking
 GetingCoin-->CoinDataBase
 CoinDataBase-->Coin
+GameOver-->PlayerHP
 @enduml
