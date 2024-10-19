@@ -1,0 +1,291 @@
+@startuml RhythmGameSceneArchitecture
+class GeneratingNoteList{
+    +List<Note> generateNote(Sound bgm)
+}
+class Notes{
+    float time
+    GameObject noteImage
+}
+class NotesDataBase{
+    +List<Notes> notesList
+}
+class PushingNotes{
+    -void pushNotes(List<Note> notes)
+}
+note top of PushingNotes
+    ノーツの生成方法よりこの辺りは変化する
+end note
+class DeletingNote{
+    +bool isSuccessful
+    -void missNote()
+    -void successNote()
+    -void deleteNote()
+}
+class Walking{
+    +Animation currentAnimation
+    -Animation walkAnimation
+    -Animation jumpAnimation
+    +float speed
+    +float jumpPower
+    -bool isMoving()
+    +void moveSideWay()
+    +void jump()
+    +Animation selectAnimation()
+}
+class Running{
+    +Animation currentAnimation
+    -Animation runAnimation
+    -Animation jumpAnimation
+    +float speed
+    +float jumpPower
+    -bool isRunning()
+    +void moveSideWay()
+    +void jump()
+    +Animation selectAnimation()
+}
+class Idle{
+    +Animation currentAnimation
+    -Animation idleAnimation
+    -bool isIdle()
+    +Animation selectAnimation()
+}
+class EnemyMovingController{
+    +Animation currentAnimation
+    -MovingAnimation moving
+    -TakingDamageAnimation takingDamage
+    +Animation selectAnimation()
+    -bool inMoving()
+    -void walk()
+}
+class EnemyHP{
+    +int hp
+    -int takeDamage()
+    -void dead()
+}
+class PlayerHP{
+    +PlayerHP hp
+    Animation takingDamageAnimation
+    +Animation takeDamageAction()
+    +int takeDamage()
+    +int heal()
+    -void dead()
+}
+class Attacking{
+    +Animation currentAnimation
+    -Animation specialAttackAnimation
+    -Animation punchAnimation
+    -Animation kickAnimation
+    +int attackPoint
+    -void specialAttack()
+    -void normalAttack()
+    -void punch()
+    -void kick()
+    +void selectAnimation()
+}
+class Countering{
+    +Animation currentAnimation
+    +int counterPoint
+    -void counter()
+    +void selectAnimation()
+}
+class AnimationContext{
+    +void setAction()
+    +void executeAction()
+}
+class PlayerAnimationManeger{
+    +Animation currentAnimation
+    -Attacking AttackingAnimation
+    -Walking wakingAnimation
+    -Running runningAnimation
+    -PlayerHP takingDamageAnimation
+    -Animation selectAnimation()
+}
+class Coin{
+    +int coinPoint
+    +GameObject coinImage
+}
+class CoinDataBase{
+    +List<Coin> coinList
+}
+class GetingCoin{
+    +int resultCoin
+    +<static>int currentCoin
+    -int getCoin()
+}
+class Skin{
+    +GameObject ClothImage
+}
+class SkinDataBase{
+    +List<Cloth> clothList 
+}
+class PossessionSkin{
+    +<static>List<Cloth> possessionCloth
+}
+class Enemy{
+    +EnemyHP hp
+    +int attackPoint
+    +GameObject enemyImage
+    +EnemyMovingController moving
+}
+class SelectingSkin{
+    +Cloth currentCloth
+    +Cloth selectCloth()
+}
+class EnemyDataBase{
+    +List<Enemy> enemyList
+}
+class CameraScrolling{
+    +float scrollSpeed
+    -Transform cameraPosition
+    -Transform cameraScroll()
+    -float calculationScrollSpeed()
+}
+class SoundingBGM{
+    +Sound bgm
+}
+class ZoomingCamera{
+    +Transform cameraPosition
+    -float zoomValue
+    +bool isCuurentAtacking
+    -Transform cameraZoom()
+}
+class CameraManeger{
+    CameraScrolling cameraScrolling
+    ZoomingCamera cameraZooming
+    -Transform cameraScroll()
+    -Transform cameraZoom()
+}
+interface IDamageable{
+    +void takeDamage()
+}
+interface IAttacking{
+    +void specialAttack()
+    +void normalAttack()
+}
+interface ISelectItemable{
+    +void selectItem()
+}
+interface IMoveable{
+    +void moveSideWay()
+    +void jump()
+}
+interface IPLayerAnimationable{
+    +Animation selectAnimation()
+}
+class calculationScore{
+    +int score
+    -int onGetCoin()
+    -int onGetCombo()
+}
+class comboing{
+    +int combo
+    +bool BooleanCombo()
+    -int countCombo()
+}
+class GameOver{
+    +bool isGameOver
+    -void gameOver()
+}
+class GameClear{
+    +bool isClear
+    -void gameClear()
+}
+class GamePlaying{
+    +bool isPlaying
+    +bool isPause
+    -void pause()
+    -void play()
+    -bool isNotPlaying()
+}
+class GameStatePresenter{
+    bool isGameOver
+    bool isGameClear
+    bool isPlaying
+    bool isPause
+    void subscribe()
+}
+class ScoresPresenter{
+    int score
+    int coin
+    void subscribe()
+}
+class PlayerStatePresenter{
+    int hp
+    void subscribe()
+}
+namespace view{
+class ResultScoreAnimatoon{
+    int score
+    void increaseScore()
+}
+class ResultCoinAnimatoon{
+    int coin
+    void increaseCoin()
+}
+class ShowingGameOver{
+    void showGameOver()
+}
+class ShowingGameClear{
+    void showGameClear()
+}
+class ShowingGamePause{
+    void showGamePause()
+}
+class PlayerHPAnimation{
+    int hp
+    GameObject hpImage
+    void decreaseHp()
+}
+}
+GeneratingNoteList->NotesDataBase
+NotesDataBase "1..*" - "*x" Notes
+PushingNotes->GeneratingNoteList
+Enemy "x..*" -- "*1" EnemyDataBase
+Enemy->EnemyMovingController
+Enemy-->EnemyHP
+EnemyHP..>IDamageable
+PlayerHP..>IDamageable
+EnemyHP-->Attacking
+EnemyHP-->Countering
+Running..>IMoveable
+Walking..>IMoveable
+SelectingSkin-->PossessionSkin
+PossessionSkin-->SkinDataBase
+SkinDataBase"x..*" -- "*1"Skin
+calculationScore-->comboing
+calculationScore-->GetingCoin
+comboing-->DeletingNote
+DeletingNote<-- Running
+DeletingNote<-- Walking
+SelectingSkin..>ISelectItemable
+Attacking..>IAttacking
+GetingCoin-->CoinDataBase
+CoinDataBase "x..*" -- "*1" Coin
+GameOver-->PlayerHP
+ZoomingCamera-->CameraManeger
+ZoomingCamera-->Attacking
+CameraScrolling-->CameraManeger
+CameraScrolling-->SoundingBGM
+PlayerHP..>IPLayerAnimationable
+Walking..>IPLayerAnimationable
+Running..>IPLayerAnimationable
+Attacking..>IPLayerAnimationable
+Countering..>IPLayerAnimationable
+Idle..>IPLayerAnimationable
+IPLayerAnimationable--o AnimationContext
+PlayerAnimationManeger->AnimationContext
+GamePlaying->GameOver
+GamePlaying-->GameClear
+GameStatePresenter-->GamePlaying
+GameStatePresenter-->GameOver
+GameStatePresenter-->GameClear
+ScoresPresenter-->calculationScore
+ScoresPresenter-->comboing
+PlayerStatePresenter-->PlayerHP
+GameStatePresenter-->ShowingGameClear
+GameStatePresenter-->ShowingGameOver
+GameStatePresenter-->ShowingGamePause
+ScoresPresenter-->ResultScoreAnimatoon
+ScoresPresenter-->ResultCoinAnimatoon
+PlayerStatePresenter->PlayerHPAnimation
+@enduml

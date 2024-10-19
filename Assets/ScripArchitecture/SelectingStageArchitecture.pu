@@ -1,0 +1,36 @@
+@startuml MapScene
+class Map{
+    +int amountStages
+    +List<Scene> stages
+    +List<GameObjct> tiles
+    -int countStages()
+    -void generateTils()
+}
+class PlayerPosition{
+    +int currentStage
+    -int Move()
+    -int MaxStageRange()
+}
+class DecisionStage{
+    -Scene currentScene
+    -void DecideStage()
+}
+class GameSaving{
+    -int currentStagePosition
+    -int currentCoin
+    -GameObject currentSkin
+    -List<Skin> possessionSkins
+    -void SaveGame()
+}
+class MapPresenter{
+    +int playerPosition
+    +void subscribe()
+}
+class ViewingPlayer{
+    +int playerPosition
+    -Transform currentPosition
+    -Transform updatePosition()
+}
+PlayerPosition-->Map
+MapPresenter-->PlayerPosition
+@enduml
