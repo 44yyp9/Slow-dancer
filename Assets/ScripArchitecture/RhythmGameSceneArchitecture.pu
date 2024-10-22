@@ -116,10 +116,14 @@ class Skin{
     +GameObject ClothImage
 }
 class SkinDataBase{
-    +List<Cloth> clothList 
+    +List<Skin> clothList 
 }
 class PossessionSkin{
-    +<static>List<Cloth> possessionCloth
+    +<static>List<Skin> possessionCloth
+}
+class GetingSkin{
+    +Skin currentCloth
+    +Skin getSkin()
 }
 class Enemy{
     +EnemyHP hp
@@ -128,8 +132,8 @@ class Enemy{
     +EnemyMovingController moving
 }
 class SelectingSkin{
-    +Cloth currentCloth
-    +Cloth selectCloth()
+    +Skin currentCloth
+    +Skin selectCloth()
 }
 class EnemyDataBase{
     +List<Enemy> enemyList
@@ -250,6 +254,8 @@ EnemyHP-->Countering
 Running..>IMoveable
 Walking..>IMoveable
 SelectingSkin-->PossessionSkin
+GetingSkin-->SkinDataBase
+GetingSkin-->PossessionSkin
 PossessionSkin-->SkinDataBase
 SkinDataBase"x..*" -- "*1"Skin
 calculationScore-->comboing
