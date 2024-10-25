@@ -19,8 +19,15 @@ class GameSaving{
     -int currentStagePosition
     -int currentCoin
     -GameObject currentSkin
-    -List<Skin> possessionSkins
+    -<static>List<Skin> possessionSkins
     -void SaveGame()
+}
+class GameLoading{
+    -int currentStagePosition
+    -int currentCoin
+    -GameObject currentSkin
+    -<static>List<Skin> possessionSkins
+    -void LoadGame()
 }
 class MapPresenter{
     +int playerPosition
@@ -33,4 +40,5 @@ class ViewingPlayer{
 }
 PlayerPosition-->Map
 MapPresenter-->PlayerPosition
+MapPresenter-->ViewingPlayer
 @enduml
