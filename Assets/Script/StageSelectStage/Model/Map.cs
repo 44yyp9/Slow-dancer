@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    private int amountStages {get; set; }
-    private int movigMaxRange { get; set; }
+    public int amountStages {get; set; }
+    public int movigMaxRange { get; set; }
     public List<GameObject> stages=new List<GameObject>();
-    //movingMaxRange‚Ìİ’è‚ğs‚¤
     private void Awake()
     {
         amountStages=countStages();
+        //movingMaxRange‚Ìİ’è‚ğs‚¤(‚Æ‚è‚ ‚¦‚¸‰¼~‚ß)
+        movigMaxRange = amountStages;
     }
     private int countStages()
     {
@@ -19,6 +20,7 @@ public class Map : MonoBehaviour
     }
     public void addMovingRange()
     {
+        if (amountStages == movigMaxRange) return;
         movigMaxRange++;
     }
 }

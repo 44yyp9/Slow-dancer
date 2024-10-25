@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public class PlayerPosition : MonoBehaviour
 {
-    int currentStage { get; set; }
+    public ReactiveProperty<int> currentStage { get; set; } = new ReactiveProperty<int>(0);
+    [SerializeField] private Map map;
     public void addStage()
     {
-        currentStage++;
+        if (map.movigMaxRange == currentStage.Value + 1 ) return;
+        currentStage.Value++;
     }
     public void backStage()
     {
-        currentStage--;
+        if ( 0 > currentStage.Value - 1) return;
+        currentStage.Value--;
     }
     //currentStage‚Ì‰Šú’l‚Ìİ’è
-    private void Awake()
+    private void Start()
     {
-        
+
     }
 }
