@@ -1,0 +1,369 @@
+@startuml RhythmGameSceneArchitecture
+namespace View{
+    class PlayerViewHP{
+        +GameObject player
+        +int hp
+        +void decreaseHp()
+        +void increaseHp()
+    }
+    class PlayerViewPosition{
+        +Transform playerPosition
+        +void moveSideWay()
+        +void moveJump()
+        +void takeDamage()
+        //Presenerにsubscribeする
+        +void receiveOpereation()
+    }
+    class GetingItemsView{
+        +void getCoin()
+    }
+    class PlayerViewAnimation{
+        +Animation currentAnition
+        +void playAnimation()
+    }
+    class EnemyViewHP{
+        +GameObject enemy
+        +int hp
+        +void decreaseHp()
+        +void increaseHp()
+        +void dead()
+    }
+    class EnemyViewPosition{
+        +Transform enemyPosition
+        +void moveSideWay()
+        +void takeDamage()
+    }
+    class EnemyViewAnimation{
+        +Animation currentAnition
+        +void playAnimation()
+    }
+    class GameStateViewAnimation{
+        GameObject gameOver
+        GameObject gameClear
+        +void isGameOver()
+        +void isGameClear()
+        +void isPlaying()
+    }
+    class ViewScore{
+        +int score
+        -Text scoreText
+        +void increaseScore()
+        +void decreaseScore()
+    }
+    class ViewCoin{
+        +int coin
+        -Text coinText
+        +void increaseCoin()
+        +void decreaseCoin()
+    }
+    class ViewCombo{
+        +int combo
+        -Text comboText
+        +void increaseCombo()
+        +void noCombo()
+    }
+    class NoteView{
+        +Transform notePosition
+        +void moveNote()
+        //ノーツを消す入力についてUniRx
+        +void destroyNote()
+        //ノーツの成功失敗についてのアニメーション制御用関数
+        //アニメーションのみの処理
+        -void isSuccess()
+        -void isMissing()
+    }
+    class KeyBoardView{
+        +void isSuccess()
+        +void isMissing()
+    }
+    class CameraView{
+        +Transform cameraPosition
+        +void zoomIn()
+        +void zoomOut()
+        +void scrolling()
+        +void stopScrolling()
+    }
+}
+namespace Presenter{
+    class PlayerPresenter{
+        +PlayerHP playerHP
+        +PlayerViewPosition playerViewPosition
+        +PlayerAnimation playerAnimation
+        +PlayerHPModel playerHPModel
+        +PlayerAnimationManeger playerAnimationManeger
+        +RunningModel runningModel
+        +WalkingModel walkingModel
+        +IdelModel idelModel
+        +void subscribe()
+        //positionについての実行を行う
+        +void excuteMove()
+        //animationについての実行を行う
+        +void excuteAnimation()
+        +void excuteTakeDamage()
+        +void currentConbo()
+    }
+    note left of PlayerPresenter
+        playerのアニメーションと位置についての
+        処理の管理は熟考の余地あり
+    end note
+    class EnemyPresenter{
+        +EnemyHP enemyHP
+        +EnemyPosition enemyPosition
+        +EnemyAnimation enemyAnimation
+        +EnemyModel enemyModel
+        +AttakingModel attakingModel
+        +CounteringModel counteringModel
+        +void subscribe()
+        //positionについての実行を行う
+        +void excuteMove()
+        //animationについての実行を行う
+        +void excuteAnimation()
+    }
+    class GameStatePresenter{
+        +GameStateAnimation gameStateAnimation
+        +GameStateMager gameStateMager
+        +void subscribe()
+    }
+    class ScorePresenter{
+        +ViewScore viewScore
+        +CalculateScoreModel calculateScoreModel
+        +void subscribe()
+    }
+    class CoinPresenter{
+        +ViewCoin viewCoin
+        CoinPointModel coinPointModel
+        +GetingItems getingItems
+        +void subscribe()
+        +void excuteGetCoin()
+    }
+    class ComboPresenter{
+        +ViewCombo viewCombo
+        +ComboModel comboModel
+        +void subscribe()
+    }
+    class RhythmGamePresenter{
+        +Note note
+        +KeyBoard keyBoard
+        +NotesGeneratorModel notesGeneratorModel
+        +void subscribe()
+        +void destroyNote()
+        +Note selectNearNote()
+    }
+    class CameraPresenter{
+        +CameraView cameraView
+        +CameraManeger cameraManeger
+        +void subscribe()
+        +void excuteZoomIn()
+        +void excuteZoomOut()
+        +void excuteScrolling()
+        +void excuteStopScrolling()
+    }
+}
+namespace Model{
+    class PlayerHPModel{
+        +int hp
+        +Animation currentAnimation
+        +Animation takeDamageAnimation
+        +void decreaseHp()
+        +void increaseHp()
+        +void selectAnimation()
+    }
+    interface IPlayerAnimateable{
+        +void selectAnimation()
+    }
+    abstract class MovingBase{
+        +bool isCombo()
+        +void moveSideWay()
+        +void Jump()
+    }
+    class WalkingModel{
+        +Transform playerCurrentPosition
+        +Animation currentAnimation
+        +Animation walkAnimation
+        +Animation jumpAnimation
+        +void moveSideWay()
+        +void Jump()
+        +void selectAnimation()
+    }
+    class RunningModel{
+        +Transform playerCurrentPosition
+        +Animation currentAnimation
+        +Animation runAnimation
+        +Animation jumpAnimation
+        +void moveSideWay()
+        +void Jump()
+        +void selectAnimation()
+    }
+    class IdelModel{
+        +Transform playerCurrentPosition
+        -float stopingTime
+        +Animation currentAnimation
+        +Animation idelAnimation
+        +void selectAnimation()
+    }
+    class AttakingModel{
+        int attackPoint
+        Animation currentAnimation
+        Animation punchAnimation
+        Animation kickAnimation
+        void specialAttack()
+        void normalAttack()
+        void punch()
+        void kick()
+        +void selectAnimation()
+    }
+    class CounteringModel{
+        Animation currentAnimation
+        Animation counterAnimation
+        void counter()
+        +void selectAnimation()
+    }
+    class AnimationContext{
+        void setAction()
+        void excuteAction()
+    }
+    class PlayerAnimationManeger{
+        Animation currentAnimation
+        PlayerHPModel playerHPModel
+        RunningModel runningModel
+        WalkingModel walkingModel
+        AttakingModel attakingModel
+        CounteringModel counteringModel
+        IdelModel idelModel
+        void selectAnimation()
+    }
+    class ComboModel{
+        bool isCombo
+        int combo
+        void addCombo()
+        void resetCombo()
+    }
+    class CalculateScoreModel{
+        int score
+        void onDeadEnemy()
+        void onGetCoin()
+        void onCombo()
+    }
+    class CoinPointModel{
+        int coin
+        void GetCoin()
+    }
+    class CoinDataBase{
+        sprite coinSprite
+        int coinPoint
+    }
+    class EnemyModel{
+        EnemyDataBase enemyDataBase
+        bool inCamera
+        Transform enemyCurrentPosition
+        Animation currentAnimation
+        void moveSideWay()
+        void takeDamage()
+        void dead()
+    }
+    class EnemyDataBase{
+        sprite enemySprite
+        int hp
+        int attackPoint
+        Animation deadAnimation
+        Animation moveAnimation
+    }
+    class CameraZoomingModel{
+        Transform cameraPosition
+        float zoomValue
+        void zoomIn()
+        void zoomOut()
+    }
+    class CameraScrollingModel{
+        Transform currentCameraPosition
+        float scrollingValue
+        void scrolling()
+        void stopScrolling()
+    }
+    class CameraManeger{
+        Transform currentCameraPosition
+        CameraZoomingModel cameraZoomingModel
+        CameraScrollingModel cameraScrollingModel
+        void specialAttack()
+    }
+    class NotesGeneratorModel{
+        Transform notePosition
+        void generateNote()
+    }
+    note right of NotesGeneratorModel
+        ノーツの生成についての処理は
+        よくわからないので熟考の余地あり
+    end note
+    class GameStateMager{
+        string gameState
+        GameOverModel gameOverModel
+        GameClearModel gameClearModel
+        GamePauseModel gamePauseModel
+        void isPlaying()
+        void isGameOver()
+        void isGameClear()
+        void isPause()
+    }
+    class GameOverModel{
+        void isGameOver()
+    }
+    class GameClearModel{
+        void isGameClear()
+    }
+    class GamePauseModel{
+        void isPlaying()
+    }
+}
+WalkingModel ..> MovingBase
+RunningModel ..> MovingBase
+RunningModel ..> IPlayerAnimateable
+WalkingModel ..> IPlayerAnimateable
+AttakingModel ..> IPlayerAnimateable
+CounteringModel ..> IPlayerAnimateable
+PlayerHPModel ..> IPlayerAnimateable
+IdelModel ..> IPlayerAnimateable
+IPlayerAnimateable --o AnimationContext
+PlayerAnimationManeger --> AnimationContext
+WalkingModel ----> ComboModel
+RunningModel ----> ComboModel
+CalculateScoreModel -> ComboModel
+CoinPointModel --> CoinDataBase
+CalculateScoreModel --> CoinPointModel
+EnemyModel --> EnemyDataBase
+CameraManeger --> CameraZoomingModel
+CameraManeger --> CameraScrollingModel
+GameStateMager --> GameOverModel
+GameStateMager --> GameClearModel
+GameStateMager --> GamePauseModel
+
+PlayerPresenter -up-> PlayerViewHP
+PlayerPresenter -up-> PlayerViewPosition
+PlayerPresenter -up-> PlayerViewAnimation
+CoinPresenter -up-> GetingItemsView
+CoinPresenter -up-> ViewCoin
+ScorePresenter -up-> ViewScore
+ComboPresenter -up-> ViewCombo
+EnemyPresenter -up-> EnemyViewHP
+EnemyPresenter -up-> EnemyViewPosition
+EnemyPresenter -up-> EnemyViewAnimation
+GameStatePresenter -up-> GameStateViewAnimation
+RhythmGamePresenter -up-> NoteView
+RhythmGamePresenter -up-> KeyBoardView
+CameraPresenter -up-> CameraView
+
+CameraPresenter -down-> CameraManeger
+RhythmGamePresenter -down-> NotesGeneratorModel
+GameStatePresenter -down-> GameStateMager
+EnemyPresenter -down-> EnemyModel
+EnemyPresenter -down-> AttakingModel
+EnemyPresenter -down-> CounteringModel
+PlayerPresenter -down-> PlayerHPModel
+PlayerPresenter -down-> PlayerAnimationManeger
+PlayerPresenter -down-> RunningModel
+PlayerPresenter -down-> WalkingModel
+PlayerPresenter -down-> IdelModel
+ComboPresenter -down-> ComboModel
+ScorePresenter -down-> CalculateScoreModel
+CoinPresenter -down-> CoinPointModel
+
+@enduml

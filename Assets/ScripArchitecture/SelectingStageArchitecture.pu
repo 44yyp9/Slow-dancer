@@ -1,4 +1,30 @@
 @startuml MapScene
+class MapPresenter{
+    +int playerPosition
+    +void subscribe()
+}
+class ViewingPlayer{
+    +int playerPosition
+    -Transform currentPosition
+    -Transform updatePosition()
+}
+namespace Model{
+    class SelectingSkinModel{
+        PossessionSkin possessionSkin
+        {Static}Skin currentSkin
+        void selectSkin()
+    }
+    class PossessionSkin{
+        {static}List<Skin> possessionSkinList
+        void addSkin(Skin skin)
+    }
+    class SkinDataBase{
+        List<Skin> skinList
+    }
+    class Skin{
+        sprite skinSprite
+        List<Animation> skinAnimations
+    }
 class Map{
     +int amountStages
     +List<Scene> stages
@@ -29,14 +55,6 @@ class GameLoading{
     -<static>List<Skin> possessionSkins
     -void LoadGame()
 }
-class MapPresenter{
-    +int playerPosition
-    +void subscribe()
-}
-class ViewingPlayer{
-    +int playerPosition
-    -Transform currentPosition
-    -Transform updatePosition()
 }
 PlayerPosition-->Map
 MapPresenter-->PlayerPosition
