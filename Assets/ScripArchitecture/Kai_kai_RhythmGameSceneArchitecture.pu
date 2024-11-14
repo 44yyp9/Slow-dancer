@@ -34,6 +34,11 @@ namespace RhythmGame {
             NotesHitterView notesHitterView
             +void subscribe()
         }
+        class NoteMovingPresenter{
+            NoteMovingView noteMovingView
+            NotesHitter notesHitter
+            +void subscribe()
+        }
     }
     namespace View{
         class NotesGenerateView{
@@ -46,11 +51,17 @@ namespace RhythmGame {
             +void findNearNotes()
             +void miss()
             +void hit()
-            +void destroyNotes()
+            +void destroyNote()
         }
         interface JudgmentintHit{
             +void hit()
             +void miss()
+        }
+        class NoteMovingView{
+            +Transform notePosition
+            +void move()
+            +void onThrouth()
+            +void destroy()
         }
         NotesHitterView .right.> JudgmentintHit
     }
@@ -59,6 +70,8 @@ NotesGeneratePresenter -down-> ReadingNotes
 NotesGeneratePresenter -up-> NotesGenerateView
 NotesHitterPresenter -down-> NotesHitter
 NotesHitterPresenter -up-> NotesHitterView
+NoteMovingPresenter -up-> NoteMovingView
+NoteMovingPresenter -down-> NotesHitter
 NotesHitter -left-> Combo
 
 namespace ActionGame {
