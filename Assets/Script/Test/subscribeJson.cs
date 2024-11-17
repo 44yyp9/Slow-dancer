@@ -12,7 +12,7 @@ namespace Test
         [System.Serializable]
         public struct Note
         {
-            public string timing;
+            public float timing;
         }
         public struct NotesData
         {
@@ -20,14 +20,19 @@ namespace Test
         }
         private void Start()
         {
+            StartCoroutine(InstantiateNote());
+        }
+        IEnumerator InstantiateNote()
+        {
             string path = "Assets/Audio/Notes/NovelGameBGM.json";
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
                 NotesData notesData = JsonUtility.FromJson<NotesData>(json);
-                for(int i = 0; i < notesData.Notes.Count; i++)
+                for (int i = 0; i < notesData.Notes.Count; i++)
                 {
                     var noteTime = notesData.Notes[i].timing;
+                    yield return new WaitForSeconds(noteTime);
                     Debug.Log(noteTime);
                 }
             }
@@ -35,12 +40,6 @@ namespace Test
             {
                 Debug.LogError("JSON file not found");
             }
-        }
-        IEnumerator InstantiateNote(float timing)
-        {
-            yield return new WaitForSeconds(timing);
-            Vector3 posi = new Vector3(0, 0, 0);
-            Instantiate(obj, posi, Quaternion.identity);
         }
     }
 }

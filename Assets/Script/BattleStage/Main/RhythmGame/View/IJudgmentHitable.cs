@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class IJudgmentHitable : MonoBehaviour
+public interface IJudgmentHitable
 {
-
+    public void hit();
+    public void miss();
 }
