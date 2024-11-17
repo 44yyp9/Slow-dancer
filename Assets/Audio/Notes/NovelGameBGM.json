@@ -4,7 +4,14 @@
       "timing": 0
     },
     {
-      "timing": 2
+      "timing": 2.5
+    },
+    {
+      "timing": 1.1
+    },{
+      "timing": 3
+    },{
+      "timing": 3
     }
   ]
 }
