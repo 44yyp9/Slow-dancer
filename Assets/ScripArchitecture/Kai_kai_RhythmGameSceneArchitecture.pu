@@ -1,0 +1,354 @@
+@startuml RhythmGameSceneArchitecture
+namespace Main{
+namespace RhythmGame {
+    namespace Model{
+        class ReadingNotes{
+            -struct Note{+float time}
+            -struct NoteData{List<Note> notes}
+            +List<float> notesTime()
+            }
+        class NotesHitter{
+            //もしかしたら
+            //pure C#でいけるかも
+            +Combo combo
+            +string judgment
+            +void hit(Note note)
+        }
+        class Combo{
+            //pure C#でいける
+            +int combo
+            +int currentCombo()
+            +void addCombo()
+            +void resetCombo()
+            +bool isCombo()
+        }
+    }
+    namespace Presenter{
+        class NotesGeneratePresenter{
+            ReadingNotes readingNotes
+            NotesGenerateView notesGenerateView
+            +void subscribe()
+        }
+        class NotesHitterPresenter{
+            NotesHitter notesHitter
+            NotesHitterView notesHitterView
+            +void subscribe()
+        }
+        class NoteMovingPresenter{
+            NoteMovingView noteMovingView
+            NotesHitter notesHitter
+            +void subscribe()
+        }
+    }
+    namespace View{
+        class NotesGenerateView{
+            +GameObject notePrefab
+            +void generateNotes()
+            -IEnumerator generateNotesCoroutine()
+        }
+        class NotesHitterView{
+            -GameObject nearNotes
+            +void findNearNotes()
+            +void miss()
+            +void hit()
+            +void destroyNote()
+        }
+        interface JudgmentintHit{
+            +void hit()
+            +void miss()
+        }
+        class NoteMovingView{
+            +Transform notePosition
+            +void move()
+            +void onThrouth()
+            +void destroy()
+        }
+        NotesHitterView .right.> JudgmentintHit
+    }
+}
+NotesGeneratePresenter -down-> ReadingNotes
+NotesGeneratePresenter -up-> NotesGenerateView
+NotesHitterPresenter -down-> NotesHitter
+NotesHitterPresenter -up-> NotesHitterView
+NoteMovingPresenter -up-> NoteMovingView
+NoteMovingPresenter -down-> NotesHitter
+NotesHitter -left-> Combo
+
+namespace ActionGame {
+    namespace Animations{
+        namespace Player{
+            class PlayerAnimationManeger{
+                -Animator animator
+                IPauseable iPauseable
+                PlayerHP playerHP
+                IConectCurrentCombo iConectCurrentCombo
+                void transformPosition()
+                void stopAnimation()
+            }
+            class IdleAnimation{
+                +void idle()
+            }
+            class RunAnimation{
+                +void startRun()
+                +void run()
+            }
+            class WalkAnimation{
+                +void startWalk()
+                +void walk()
+            }
+            class JumpAnimation{
+                +void startJump()
+                +void jump()
+                +void takeOnGround()
+            }
+            class NormalAttackAnimation{
+                +int attakingPoint
+                +void attack()
+            }
+            class SpecialAttackAnimation{
+                +int attakingPoint
+                +void specialAttack()
+            }
+            class TakingDamageAnimation{
+                +void damage()
+            }
+            class DeadAnimation{
+                +void dead()
+            }
+        }
+        note bottom of Player
+        StateMachineBehaviour
+        を使って実装するGUIでできそう
+        end note
+        namespace Enemy{
+            class EnemyAnimationManeger{
+                -Animator animator
+                IPauseable iPauseable
+                void transformPosition()
+                +void stopAnimation()
+            }
+            class IdleAnimation{
+                +void idle()
+            }
+            class walkAnimation{
+                +void walk()
+            }
+            class deadAnimation{
+                +void dead()
+            }
+        }
+        note bottom of Enemy
+        EnemyはあとでAnimationの設計を行う
+        end note
+        abstract AnimationManeger{
+            -Animator animator
+            IPauseable iPauseable
+            +void transformPosition()
+            +void stopAnimation()
+        }
+        PlayerAnimationManeger ..down..> AnimationManeger
+        EnemyAnimationManeger .down.> AnimationManeger
+    }
+    namespace Player{
+        class PlayerHP{
+            +int hp
+            IConectPlayerHP iConectPlayerHP
+            +int currentHP()
+            +void damage()
+            +void heal()
+        }
+        class GettingCoin{
+            +int coin
+            IConectCoin iConectCoin
+            +int currentCoin()
+            +void getCoin()
+        }
+    }
+    namespace Camera{
+        class CameraZooming{
+            +Transform playerTransform
+            -float zoomingSpeed
+            -float zommingValue
+            +void zooming()
+            +void zoomOut()
+        }
+        class CameraScrolling{
+            +Transform playerTransform
+            -float scrollingSpeed
+            -float scrollingValue
+            +void scrolling()
+        }
+        class CameraManeger{
+            +IPauseable iPauseable
+            +GameObject player
+            +CameraZooming cameraZooming
+            +CameraScrolling cameraScrolling
+            +void cameraZooming()
+            +void cameraScrolling()
+        }
+        CameraManeger -down->CameraZooming
+        CameraManeger -down->CameraScrolling
+    }
+    namespace Enemy{
+        class EnemyHP{
+            +int hp
+            +void damage()
+            +void dead()
+        }
+    }
+    interface IDamegeable{
+        +void damage()
+        +void dead()
+    }
+    EnemyHP .down.> IDamegeable
+    PlayerHP .down.> IDamegeable
+}
+
+CameraManeger -up->IPauseable
+
+namespace UI{
+    namespace Model{
+        class UIScoreModel{
+            UICoinModel coinModel
+            UIComboModel comboModel
+            +int score
+            +int addScore()
+        }
+        class UIPlayerHPModel{
+            +int hp
+            +int currentHP()
+        }
+        class UIComboModel{
+            //pure C#で
+            +int combo
+            +int currentCombo()
+        }
+        class UICoinModel{
+            {static}+int coin
+            +int currentCoin()
+        }
+    }
+    namespace Presenter{
+        class UIScorePresenter{
+            UIScoreModel uiScoreModel
+            UIScoreView uiScoreView
+            +void subscribe()
+        }
+        class UIPlayerHPPresenter{
+            UIPlayerHPModel uiPlayerHPModel
+            UIPlayerHPView uiPlayerHPView
+            +void subscribe()
+        }
+        class UIComboPresenter{
+            UIComboModel uiComboModel
+            UIComboView uiComboView
+            +void subscribe()
+        }
+        class UICoinPresenter{
+            UICoinModel uiCoinModel
+            UICoinView uiCoinView
+            +void subscribe()
+        }
+    }
+    namespace View{
+        class UIScoreView{
+            +int score
+            +void addScoreAnimation()
+        }
+        class UIPlayerHPView{
+            +int hp
+            +void damageAnimation()
+            +void healAnimation()
+        }
+        class UIComboView{
+            +int combo
+            +void addComboAnimation()
+        }
+        class UICoinView{
+            +int coin
+            +void getCoinAnimation()
+        }
+        abstract class UIView{
+            +void incerasePoint(int point)
+            +void increseAnimation()
+        }
+        UICoinView .down.>UIView
+        UIScoreView .down.>UIView
+        UIComboView .down.>UIView
+        UIPlayerHPView .down.>UIView
+    }
+    UIScoreModel -right-> UIComboModel
+    UIScoreModel -left-> UICoinModel
+
+    UIScorePresenter -up-> UIScoreModel
+    UIScorePresenter -down-> UIScoreView
+    UIPlayerHPPresenter -up-> UIPlayerHPModel
+    UIPlayerHPPresenter -down-> UIPlayerHPView
+    UIComboPresenter -up-> UIComboModel
+    UIComboPresenter -down-> UIComboView
+    UICoinPresenter -up-> UICoinModel
+    UICoinPresenter -down-> UICoinView
+}
+namespace State{
+    class GameTime{
+        +float playingTime
+        +float pauseTime
+        +void addTime()
+    }
+    class GameOver{
+        +bool isGameOver
+        +void gameOver()
+    }
+    class GameClear{
+        +bool isGameClear
+        +void gameClear()
+    }
+    class GamePause{
+        GameTime gameTime
+        +bool isPause
+        +void pause()
+        +void resume()
+        +float isTime()
+    }
+    GamePause -up-> GameTime
+}
+class ComboSender{
+    UICoinModel uiCoinModel
+    Combo combo
+    +void subscribe()
+}
+class PlayerHPSender{
+    UIPlayerHPModel uiPlayerHPModel
+    PlayerHP playerHP
+    +void subscribe()
+}
+class CoinPointSender{
+    GettingCoin gettingCoin
+    UICoinModel uiCoinModel
+    +void subscribe()
+}
+class CurrentComboSender{
+    PlayerAnimationManeger playerAnimationManeger
+    Combo combo
+    +void subscribe()
+}
+interface IComboingable{
+    +bool isCombo()
+}
+interface IPauseable{
+    +float isTime()
+}
+ComboSender -up->Combo
+ComboSender -->UIComboModel
+CurrentComboSender -up-> Combo
+Combo .down.>IComboingable
+CoinPointSender -->UICoinModel
+PlayerHPSender -down-> UIPlayerHPModel
+CurrentComboSender -down-> PlayerAnimationManeger
+PlayerHPSender -up->ActionGame.Player.PlayerHP
+CoinPointSender -up-> GettingCoin
+GamePause ..down..> IPauseable
+EnemyAnimationManeger -up-> IPauseable
+PlayerAnimationManeger -up-> IPauseable
+}
+@enduml
