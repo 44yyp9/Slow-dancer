@@ -4,6 +4,7 @@ using UnityEngine;
 using UniRx;
 using System.Linq;
 using System;
+using static HitterType;
 
 public class NotesHitter : MonoBehaviour
 {
@@ -56,36 +57,31 @@ public class NotesHitter : MonoBehaviour
     /// <summary>
     /// コンボの通知を行う
     /// </summary>
-    private ReactiveProperty<List<hitterType>> _notesHitterList=new ReactiveProperty<List<hitterType>>();
+    private ReactiveProperty<HitterType> _noteHitter = new ReactiveProperty<HitterType>();
     //プロパティが上手く発火しない
-    public ReactiveProperty<List<hitterType>> notesHitterList
+    public ReactiveProperty<HitterType> noteHitter
     {
-        get { return _notesHitterList; }
+        get { return _noteHitter; }
         set
         {
-            if (_notesHitterList.Value != value.Value)
+            _noteHitter.Value = value.Value;
+            if (_noteHitter.Value.hitType == HitterType.hitterType.Good) isGoodHit();
+            else if (_noteHitter.Value.hitType == HitterType.hitterType.Bad) isBadHit();
+            else
             {
-                Debug.Log("test");
-                _notesHitterList.Value=value.Value;
+                Debug.Log("error hit");
             }
         }
     }
 
     [SerializeField] private Combo combo;
-    public enum hitterType
-    {
-        Good,
-        Bad
-    }
     public void isGoodHit()
     {
-        Debug.Log("hit!");
-        combo.comboList.Value.Add(hitterType.Good);
+        combo.comboElement = noteHitter.Value;
     }
     public void isBadHit()
     {
-        Debug.Log("bad!");
-        combo.comboList.Value.Add(hitterType.Bad);
+        combo.comboElement = noteHitter.Value;
     }
 
     private void Start()
@@ -104,5 +100,21 @@ public class NotesHitter : MonoBehaviour
             }
             yield return null;
         }
+    }
+}
+public class HitterType
+{
+    public enum hitterType
+    {
+        Good,
+        Bad,
+        empty
+    }
+    public hitterType hitType { get;set; }
+    public int hitOrdering { get; set; }
+    public HitterType(int _hitOrdering,hitterType _hitType)
+    {
+        hitOrdering = _hitOrdering;
+        hitType = _hitType;
     }
 }

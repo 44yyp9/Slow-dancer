@@ -10,7 +10,7 @@ public class NotesHitterPresenter : MonoBehaviour
     private void Start()
     {
         notesHitter.nearNoteObj.Subscribe(_ => notesHitterView.nearNote = notesHitter.nearNoteObj).AddTo(this);
-        notesHitterView.catchingHiting.Subscribe(_ => notesHitter.notesHitterList = notesHitterView.catchingHiting).AddTo(this);
+        notesHitterView.catchingHited.Subscribe(_ => notesHitter.noteHitter = notesHitterView.catchingHited ).AddTo(this);
         notesHitterView.countingPushButton.Subscribe( _ =>notesHitter.countingPushButton =notesHitterView.countingPushButton).AddTo(this);
     }
 }

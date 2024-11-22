@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class IComboable : MonoBehaviour
+public interface IComboable
 {
-
+    bool BooleanjudgeCombo();
 }

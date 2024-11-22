@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using static HitterType;
 
 public class NotesHitterView : MonoBehaviour,IJudgmentHitable
 {
@@ -42,18 +43,21 @@ public class NotesHitterView : MonoBehaviour,IJudgmentHitable
     /// <summary>
     /// hitÇ∆ÇªÇ§Ç≈Ç»Ç¢missÇÃÇ∆Ç´ÇÃèàóù
     /// </summary>
-    public ReactiveProperty<List<NotesHitter.hitterType>> catchingHiting = new ReactiveProperty<List<NotesHitter.hitterType>>();
+    public ReactiveProperty<HitterType> catchingHited = new ReactiveProperty<HitterType>(new HitterType(0,hitterType.empty));
+    private int hitedOrdering = 0;
     public void miss()
     {
         isPushing = false;
-        catchingHiting.Value.Add(NotesHitter.hitterType.Bad);
+        catchingHited.Value =new HitterType(hitedOrdering,HitterType.hitterType.Bad);
+        hitedOrdering++;
         countingPushButton.Value++;
         nearNote.Value.SetActive(false);
     }
     public void hit()
     {
         isPushing= true;
-        catchingHiting.Value.Add(NotesHitter.hitterType.Good);
+        catchingHited.Value = new HitterType(hitedOrdering, HitterType.hitterType.Good);
+        hitedOrdering++;
         countingPushButton.Value++;
         nearNote.Value.SetActive(false);
     }
