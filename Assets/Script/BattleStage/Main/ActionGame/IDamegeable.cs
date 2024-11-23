@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class IDamegeable : MonoBehaviour
+public interface IDamegeable
 {
-
+    public void damege(int damegePoint);
+    public void dead();
 }

@@ -165,20 +165,20 @@ namespace ActionGame {
     }
     namespace Item{
         class Coin{
-            +int coinPoint
+            -CoinDataBase coinDataBase
             +void onGetCoin()
         }
         interface IGetingCoin{
             +void onGetCoin()
         }
         class CoinDataBase{
-            +Coin _coin
-            +sprite _sprite
+            +int coinPoint
+            +GameObject coinPrefab
         }
     }
     Coin ..> IGetingCoin
-    CoinDataBase --> Coin
-    GettingCoin -down-> CoinDataBase
+    Coin -->CoinDataBase
+    GettingCoin -down-> Coin
     namespace Camera{
         class CameraZooming{
             +Transform playerTransform

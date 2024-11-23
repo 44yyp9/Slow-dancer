@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class IGetingCoinable : MonoBehaviour
+public interface IGetingCoinable
 {
-
+    public void onGetCoin();
 }
