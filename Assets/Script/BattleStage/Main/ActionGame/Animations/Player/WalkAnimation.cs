@@ -5,7 +5,6 @@ using UniRx;
 
 public class WalkAnimation : MonoBehaviour
 {
-    /*
     [SerializeField] private float walkingSpeed;
     private void walk()
     {
@@ -17,8 +16,6 @@ public class WalkAnimation : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             walk();
-            Debug.Log("walk");
         }
     }
-    */
 }

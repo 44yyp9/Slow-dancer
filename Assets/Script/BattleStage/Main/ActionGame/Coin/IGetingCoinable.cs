@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public interface IDamegeable
+public interface IGetingCoinable
 {
-    public void damege(int damegePoint);
-    public void dead();
+    public void onGetCoin();
 }

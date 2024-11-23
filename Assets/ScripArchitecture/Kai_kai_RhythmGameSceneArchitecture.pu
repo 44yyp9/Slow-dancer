@@ -152,18 +152,33 @@ namespace ActionGame {
     namespace Player{
         class PlayerHP{
             +int hp
-            IConectPlayerHP iConectPlayerHP
             +int currentHP()
             +void damage()
             +void heal()
         }
         class GettingCoin{
-            +int coin
-            IConectCoin iConectCoin
+            -Coin coin
+            +int coinPoint
             +int currentCoin()
             +void getCoin()
         }
     }
+    namespace Item{
+        class Coin{
+            -CoinDataBase coinDataBase
+            +void onGetCoin()
+        }
+        interface IGetingCoin{
+            +void onGetCoin()
+        }
+        class CoinDataBase{
+            +int coinPoint
+            +GameObject coinPrefab
+        }
+    }
+    Coin ..> IGetingCoin
+    Coin -->CoinDataBase
+    GettingCoin -down-> Coin
     namespace Camera{
         class CameraZooming{
             +Transform playerTransform
