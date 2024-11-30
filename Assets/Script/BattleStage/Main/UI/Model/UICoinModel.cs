@@ -5,5 +5,5 @@ using UniRx;
 
 public class UICoinModel : MonoBehaviour
 {
-
+     public ReactiveProperty<int> totalCoin;
 }

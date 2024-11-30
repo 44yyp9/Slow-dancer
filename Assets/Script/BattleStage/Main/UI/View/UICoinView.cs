@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class UICoinView : MonoBehaviour
+public class UICoinView : UIView
 {
-
+    public override void upPointAnimation()
+    {
+        
+    }
+    public override void downPointAnimation()
+    {
+       
+    }
 }
