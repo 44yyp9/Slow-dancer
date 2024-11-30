@@ -21,11 +21,6 @@ public abstract class UIView : MonoBehaviour
             var increment=value.Value-_veiwPoint.Value;
             if (increment < 0) downPointAnimation();
             else if (increment > 0) upPointAnimation();
-            else if (increment == 0) Debug.Log("unchange");
-            else
-            {
-                Debug.Log("error Point");
-            }
             _veiwPoint.Value = value.Value;
             point.GetComponent<Text>().text = _veiwPoint.Value.ToString();
         }

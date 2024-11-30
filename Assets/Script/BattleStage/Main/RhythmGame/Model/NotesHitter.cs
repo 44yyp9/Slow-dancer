@@ -67,10 +67,6 @@ public class NotesHitter : MonoBehaviour
             _noteHitter.Value = value.Value;
             if (_noteHitter.Value.hitType == HitterType.hitterType.Good) isGoodHit();
             else if (_noteHitter.Value.hitType == HitterType.hitterType.Bad) isBadHit();
-            else
-            {
-                Debug.Log("error hit");
-            }
         }
     }
 
