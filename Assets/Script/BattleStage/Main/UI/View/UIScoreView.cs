@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class UIScoreView : MonoBehaviour
+public class UIScoreView : UIView
 {
-
+    public override void upPointAnimation()
+    {
+        
+    }
+    public override void downPointAnimation()
+    {
+        
+    }
 }
