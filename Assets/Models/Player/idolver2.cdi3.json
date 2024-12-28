@@ -1,0 +1,131 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "ParamAngleX",
+			"GroupId": "",
+			"Name": "角度 X"
+		},
+		{
+			"Id": "Param8",
+			"GroupId": "",
+			"Name": "パラメータ10"
+		},
+		{
+			"Id": "Param12",
+			"GroupId": "",
+			"Name": "berimbau"
+		},
+		{
+			"Id": "ParamAngleY",
+			"GroupId": "",
+			"Name": "角度 Y"
+		},
+		{
+			"Id": "ParamAngleZ",
+			"GroupId": "",
+			"Name": "角度 Z"
+		},
+		{
+			"Id": "Param",
+			"GroupId": "",
+			"Name": "左足"
+		},
+		{
+			"Id": "Param3",
+			"GroupId": "",
+			"Name": "左靴"
+		},
+		{
+			"Id": "Param2",
+			"GroupId": "",
+			"Name": "左脛"
+		},
+		{
+			"Id": "Param4",
+			"GroupId": "",
+			"Name": "右脚"
+		},
+		{
+			"Id": "Param5",
+			"GroupId": "",
+			"Name": "右脛"
+		},
+		{
+			"Id": "Param6",
+			"GroupId": "",
+			"Name": "右靴"
+		},
+		{
+			"Id": "Param9",
+			"GroupId": "",
+			"Name": "体"
+		},
+		{
+			"Id": "Param11",
+			"GroupId": "",
+			"Name": "スカート"
+		},
+		{
+			"Id": "Param7",
+			"GroupId": "",
+			"Name": "右腕"
+		},
+		{
+			"Id": "Param10",
+			"GroupId": "",
+			"Name": "左腕"
+		}
+	],
+	"ParameterGroups": [],
+	"Parts": [
+		{
+			"Id": "Part",
+			"Name": "眉"
+		},
+		{
+			"Id": "Part5",
+			"Name": "左"
+		},
+		{
+			"Id": "Part2",
+			"Name": "髪"
+		},
+		{
+			"Id": "Part3",
+			"Name": "顔"
+		},
+		{
+			"Id": "Part4",
+			"Name": "腕"
+		},
+		{
+			"Id": "Part7",
+			"Name": "服"
+		},
+		{
+			"Id": "Part8",
+			"Name": "脚"
+		},
+		{
+			"Id": "Part11",
+			"Name": "髪後ろ"
+		},
+		{
+			"Id": "Part22",
+			"Name": "アイドル差分用ver2.psd（対応無し）"
+		},
+		{
+			"Id": "Part6",
+			"Name": "右"
+		},
+		{
+			"Id": "Part9",
+			"Name": "左"
+		},
+		{
+			"Id": "Part10",
+			"Name": "右"
+		}
+	]
+}
