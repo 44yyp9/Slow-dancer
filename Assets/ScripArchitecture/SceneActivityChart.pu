@@ -1,0 +1,62 @@
+@startuml SceneActivityChart
+title SceneActivityChart
+
+|Start Scene|
+
+start
+:スタート画面でスタートボタンを押す;
+if (始めから?) then (no)
+    :セーブデータのロード;
+    |Battle Select Scene|
+else (yes)
+    |Start Scene|
+    :新規ゲームを開始する;
+    :セーブデータの作成;
+    |Story Scene|
+    :一番始めのストリート;
+    |Battle Select Scene|
+endif
+
+while (マップを移動する) is (yes)
+    if (ステージを選択) then (バトルステージ)
+        |Battle Scene|
+        :バトルの開始;
+        if (クリア) then (yes)
+            if (最終ステージ) then (yes)
+                |Story Scene|
+                :最後のストリート;
+            else (no)
+                |Battle Scene|
+                :次のステージが開放;
+            endif
+        else (no)
+            :ゲームオーバー;
+            :バトルを終了;
+        endif
+        |Result Scene|
+        :リザルト画面の表示;
+        :ゲーム内データをオートセーブ;
+        |Battle Select Scene|
+        :バトルの選択画面に戻る;
+    else (ショップ)
+        |Shop Scene|
+        :ショップ画面の表示;
+        :アイテムの購入;
+        :購入したアイテムをインベントリに追加;
+        :シーン遷移中アイテムなどのオートセーブ;
+        |Battle Select Scene|
+    endif
+endwhile
+
+|Start Scene|
+stop
+@enduml
+
+/*
+オートセーブではjsonファイルでデータを取り扱う
+
+以下がstaticとして実装される
+コインの枚数
+コスチュームのリスト
+開放中のステージ
+*/
