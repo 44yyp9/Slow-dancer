@@ -1,0 +1,117 @@
+@startuml StartSceneScriptArchitecture
+namespace GameStartScene{
+    namespace View{
+        abstract class UIViewTemplate{
+            +void clicked()
+        }
+        abstract class UISliderViewTemplate{
+            +void setVolume()
+        }
+        class GameStartingView{
+        }
+        class GameLoadingView{
+        }
+        class GameOptionView{
+        }
+        class BGMSliderView{
+        }
+        class SESliderView{
+        }
+        class GameEndView{
+        }
+        GameStartingView .down.> UIViewTemplate
+        GameLoadingView .down.> UIViewTemplate
+        GameOptionView .down.> UIViewTemplate
+        GameEndView .down.> UIViewTemplate
+        BGMSliderView .down.> UISliderViewTemplate
+        SESliderView .down.> UISliderViewTemplate
+    }
+    namespace Presenter{
+        class GameStartingPresenter{
+            -GameStartingView view
+            -GameStartingModel model
+            +subscribe()
+            -onClicked()
+        }
+        class GameLoadingPresenter{
+            -GameLoadingView view
+            -GameLoadingModel model
+            +subscribe()
+            -onClicked()
+        }
+        class GameOptionPresenter{
+            -GameOptionView view
+            -GameOptionModel model
+            +subscribe()
+            -onClicked()
+        }
+        class BGMSliderPresenter{
+            -BGMSliderView view
+            +subscribe()
+            -onSlided()
+        }
+        class SESliderPresenter{
+            -SESliderView view
+            +subscribe()
+            -onSlided()
+        }
+        class GameEndPresenter{
+            -GameEndView view
+            -GameEndModel model
+            +subscribe()
+            -onClicked()
+        }
+    }
+    namespace Model{
+        class GameStartingModel{
+            -SaveDataController saveDataController
+            -startGame()
+            -createSaveData()
+            -goToMovie()
+        }
+        class GameLoadingModel{
+            -SaveDataController saveDataController
+            -loadGame()
+            +openLoadSaveDatas()
+            +closeLoadSaveDatas()
+            -loadSaveData()
+            -goToMap()
+        }
+        class GameOptionModel{
+            -GameObject option
+            +openOption()
+            +closeOption()
+        }
+        class GameEndModel{
+            +endGame()
+        }
+    }
+    class SaveDataController{
+        //未実装なので追って追加するかも
+        +create()
+        +load()
+    }
+    static class Option{
+        +int bgmVolume
+        +int SEVolume
+        +void setBGMVolume()
+        +void setSEVolume()
+    }
+    GameStartingModel -up-> SaveDataController
+    GameLoadingModel -up-> SaveDataController
+    GameStartingPresenter -up-> GameStartingModel
+    GameStartingPresenter -down-> GameStartingView
+    GameLoadingPresenter -up-> GameLoadingModel
+    GameLoadingPresenter -down-> GameLoadingView
+    GameOptionPresenter -up-> GameOptionModel
+    GameOptionPresenter -down-> GameOptionView
+    BGMSliderPresenter -down-> BGMSliderView
+    SESliderPresenter -down-> SESliderView
+    GameEndPresenter -up-> GameEndModel
+    GameEndPresenter -down-> GameEndView
+    SESliderPresenter -up-> Option
+    BGMSliderPresenter -up-> Option
+}
+
+
+@enduml
