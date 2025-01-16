@@ -81,6 +81,8 @@ namespace GameStartScene{
         }
         class GameOptionModel{
             -GameObject option
+            -Option optionData
+            +setUpVolume()
             +openOption()
             +closeOption()
         }
@@ -119,6 +121,7 @@ namespace GameStartScene{
     BGMSliderView -up-> Option
     GameOptionModel -up-> ISabWindowControllerable
     GameLoadingButtonModel -up-> ISabWindowControllerable
+    GameOptionModel -down-> Option
 }
 
 

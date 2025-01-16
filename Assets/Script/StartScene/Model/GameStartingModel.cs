@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using UnityEngine.SceneManagement;
 
 public class GameStartingModel : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameStartingModel : MonoBehaviour
     public void startGame()
     {
         Debug.Log("start");
+        SceneManager.LoadScene("StartScene");
     }
     private void createSaveData()
     {
