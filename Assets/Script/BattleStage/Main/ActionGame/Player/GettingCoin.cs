@@ -5,7 +5,8 @@ using UniRx;
 
 public class GettingCoin : MonoBehaviour
 {
-    public ReactiveProperty<int> totalCoin=new ReactiveProperty<int>(0);
+    public static int havingCoin;
+    public ReactiveProperty<int> totalCoin=new ReactiveProperty<int>(havingCoin);
     private void OnTriggerEnter2D(Collider2D coins)
     {
         if(coins.TryGetComponent(out Coin coin))

@@ -9,9 +9,11 @@ namespace GameStartScene{
         }
         class GameStartingView{
         }
-        class GameLoadingView{
+        class GameLoadingButtonView{
         }
         class GameOptionView{
+        }
+        class GameLoadingView{
         }
         class BGMSliderView{
         }
@@ -20,6 +22,7 @@ namespace GameStartScene{
         class GameEndView{
         }
         GameStartingView .down.> UIViewTemplate
+        GameLoadingButtonView .down.> UIViewTemplate
         GameLoadingView .down.> UIViewTemplate
         GameOptionView .down.> UIViewTemplate
         GameEndView .down.> UIViewTemplate
@@ -30,6 +33,12 @@ namespace GameStartScene{
         class GameStartingPresenter{
             -GameStartingView view
             -GameStartingModel model
+            +subscribe()
+            -onClicked()
+        }
+        class GameLoadingButtonPresenter{
+            -GameLoadingButtonView view
+            -GameLoadingModel model
             +subscribe()
             -onClicked()
         }
@@ -45,16 +54,6 @@ namespace GameStartScene{
             +subscribe()
             -onClicked()
         }
-        class BGMSliderPresenter{
-            -BGMSliderView view
-            +subscribe()
-            -onSlided()
-        }
-        class SESliderPresenter{
-            -SESliderView view
-            +subscribe()
-            -onSlided()
-        }
         class GameEndPresenter{
             -GameEndView view
             -GameEndModel model
@@ -69,16 +68,22 @@ namespace GameStartScene{
             -createSaveData()
             -goToMovie()
         }
-        class GameLoadingModel{
-            -SaveDataController saveDataController
-            -loadGame()
+        class GameLoadingButtonModel{
+            GameObject loadWindow
             +openLoadSaveDatas()
             +closeLoadSaveDatas()
+        }
+        class GameLoadingModel{
+            -SaveDataController saveDataController
+            -string saveDataPath
+            +loadGame()
             -loadSaveData()
             -goToMap()
         }
         class GameOptionModel{
             -GameObject option
+            -Option optionData
+            +setUpVolume()
             +openOption()
             +closeOption()
         }
@@ -87,30 +92,47 @@ namespace GameStartScene{
         }
     }
     class SaveDataController{
-        //未実装なので追って追加するかも
         +create()
+        +save()
         +load()
     }
+    class SoundDataController{
+        -string json
+        -string jsonPath
+        +setBGMVolume()
+        +setSEVolume()
+        +readSoundVoulume()
+    }
     static class Option{
+        -SoundDataController soundDataController
         +int bgmVolume
         +int SEVolume
         +void setBGMVolume()
         +void setSEVolume()
     }
+    interface ISabWindowControllerable{
+        +void openWindow()
+        +void closeWindow()
+    }
     GameStartingModel -up-> SaveDataController
     GameLoadingModel -up-> SaveDataController
     GameStartingPresenter -up-> GameStartingModel
     GameStartingPresenter -down-> GameStartingView
+    GameLoadingButtonPresenter -up-> GameLoadingButtonModel
+    GameLoadingButtonPresenter -down-> GameLoadingButtonView
     GameLoadingPresenter -up-> GameLoadingModel
     GameLoadingPresenter -down-> GameLoadingView
     GameOptionPresenter -up-> GameOptionModel
     GameOptionPresenter -down-> GameOptionView
-    BGMSliderPresenter -down-> BGMSliderView
-    SESliderPresenter -down-> SESliderView
     GameEndPresenter -up-> GameEndModel
     GameEndPresenter -down-> GameEndView
-    SESliderPresenter -up-> Option
-    BGMSliderPresenter -up-> Option
+    SESliderView -up-> Option
+    BGMSliderView -up-> Option
+    GameOptionModel -up-> ISabWindowControllerable
+    GameLoadingButtonModel -up-> ISabWindowControllerable
+    GameOptionModel -down-> Option
+    Option -up-> SoundDataController
+    GameOptionModel -right->SoundDataController
 }
 
 
