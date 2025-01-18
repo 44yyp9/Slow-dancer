@@ -75,6 +75,7 @@ namespace GameStartScene{
         }
         class GameLoadingModel{
             -SaveDataController saveDataController
+            -string saveDataPath
             +loadGame()
             -loadSaveData()
             -goToMap()
@@ -91,11 +92,19 @@ namespace GameStartScene{
         }
     }
     class SaveDataController{
-        //未実装なので追って追加するかも
         +create()
+        +save()
         +load()
     }
+    class SoundDataController{
+        -string json
+        -string jsonPath
+        +setBGMVolume()
+        +setSEVolume()
+        +readSoundVoulume()
+    }
     static class Option{
+        -SoundDataController soundDataController
         +int bgmVolume
         +int SEVolume
         +void setBGMVolume()
@@ -122,6 +131,8 @@ namespace GameStartScene{
     GameOptionModel -up-> ISabWindowControllerable
     GameLoadingButtonModel -up-> ISabWindowControllerable
     GameOptionModel -down-> Option
+    Option -up-> SoundDataController
+    GameOptionModel -right->SoundDataController
 }
 
 

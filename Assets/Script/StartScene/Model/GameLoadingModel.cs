@@ -5,11 +5,11 @@ using UniRx;
 
 public class GameLoadingModel : MonoBehaviour
 {
-    [SerializeField] private GameObject SaveDatas;
-    private SaveDataController saveController;
+    [SerializeField] private string saveDataPath;
     public void loadGame()
     {
-
+        Debug.Log("test");
+        var savedata=new SaveDataController();
     }
     private void loadSaveData()
     {

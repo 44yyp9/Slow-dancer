@@ -22,9 +22,15 @@ public class GameOptionModel : MonoBehaviour,ISabWindowControllerable
     }
     private void setUpVolume()
     {
-        var bgmVoulum=Options.bgmValue;
-        var seVoulum=Options.seValue;
+        var soundDataController=new SoundDataController();
+        SoundVoulumeStruct.SoundVolumeData volumeData = soundDataController.readSoundVolume();
+        var bgmVoulum=volumeData.BGMVolume;
+        var seVoulum=volumeData.SEVolume;
+        //volumeのBGMの値の初期設定
         bgm.volume = bgmVoulum;
         se.volume = seVoulum;
+        //シングルトンにアクセス
+        Options.bgmValue = bgmVoulum;
+        Options.seValue = seVoulum;
     }
 }

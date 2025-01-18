@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class GameLoadingView : MonoBehaviour
+public class GameLoadingView : UIViewTemplate
 {
 
 }

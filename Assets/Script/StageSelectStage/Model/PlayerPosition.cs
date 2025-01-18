@@ -9,7 +9,7 @@ public class PlayerPosition : MonoBehaviour
     [SerializeField] private Map map;
     public void addStage()
     {
-        if (map.movigMaxRange == currentStage.Value + 1 ) return;
+        if (Map.movigMaxRange == currentStage.Value + 1 ) return;
         currentStage.Value++;
     }
     public void backStage()

@@ -6,18 +6,26 @@ using UnityEngine.SceneManagement;
 
 public class GameStartingModel : MonoBehaviour
 {
+    [Header("オートセーブのパス")]
+    [SerializeField] private string autoJsonPath;
+    [Header("始まりのストーリーのScene名を入力")]
+    [SerializeField] private string startStoryScene;
     SaveDataController saveDataController;
     public void startGame()
     {
-        Debug.Log("start");
-        SceneManager.LoadScene("StartScene");
+        createSaveData();
+        goToMovie();
     }
     private void createSaveData()
     {
-
+        saveDataController = new SaveDataController();
+        //新規セーブデータの作成
+        saveDataController.create(autoJsonPath);
+        //新規データからゲーム内データに反映
+        saveDataController.load(autoJsonPath);
     }
     private void goToMovie()
     {
-
+        SceneManager.LoadScene(startStoryScene);
     }
 }
