@@ -1,0 +1,19 @@
+//[こはく 左]
+//[ゆうこ 右]
+//[videoplay url=Trionfi/Resources/TEST.mp4]
+//[shake layer=message time=1000]
+//[fadeout]
+
+【Kohaku】
+We have moved next file.
+
+【Kohaku】
+Subroutines and macros can be written in the same way
+You can use them in the same way as Kirikiri Kirikiri.
+
+【Yuko】
+For other tags, please refer to the attached simple reference or the online reference on the official website.
+
+【Kohaku】
+That's all for this tutorial.
+

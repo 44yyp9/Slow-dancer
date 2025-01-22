@@ -1,0 +1,141 @@
+[macro name=fadeout]     
+[snapshot]
+[image layer=10 color=black]
+[trans  wait = 750]
+[macroend]
+
+[macro name=fadein]
+[snapshot]
+[imagefree layer=10]
+[trans  wait = 750]
+[macroend]
+
+*begin
+
+[image layer=0 storage=black]
+[snapshot]
+[image layer=0 storage=sprite/bg/schoolroomhibig130901]
+
+[image layer=1 storage=sprite/character/portrait_kohaku_01 pos=left yoff =-41 time=1000 actor=Kohaku]
+[image layer=2 storage=portrait_yuko_01 dicedatlas=sprite/character/yuko pos=right yoff =-41 time=1000 actor=Yuko]
+[trans rule=rule/030  wait = 750]
+
+[initscene]
+
+[audio buf=0 storage=sound/bgm/c3 time=1000]
+
+【Kohaku】
+This is a sample script for a general novel game and conversation scene.
+
+【Kohaku】
+Lines enclosed in single-byte [] are recognized as tags (instructions).
+
+【Kohaku】
+Kirikiri Kiriri/KAG (commonly used in PC games) KAGEX)
+It has a compatible format and instruction system.
+
+【Kohaku】
+Lines beginning with ; (half-width) or / (half-width) are ignored as comments.
+
+【Kohaku】
+The difference between the two is whether they are recognized as "comment tags" or not.
+It is either completely removed. It is mainly for debugging purposes.
+
+【Yuko】
+The name is displayed in the name display area by enclosing it in【】
+
+【Yuko】
+The string of text other than the tag that follows is displayed in the message area.
+
+[Voice of Heaven/Yuko]
+When the speaker and the display are different, separate them with a single-byte /.
+When using the Releaser features, such as voice assignments, you can use the
+Refer to the speaker.
+
+【Yuko】
+If there is a blank line, it will wait there for a click (tap).
+
+【Kohaku】
+Rich text is left to Unity (uGUI) tags.
+<> is the tag (sorry for the complication, ......).
+
+【Kohaku】
+For example, <color value=#00FF00>color</color> or <size=48> like this
+You can even change the font size</size>.
+
+【Yuko】
+In addition to < i>italicized</i> and <b>bold</b
+<ruby value=ruby>ruby</ruby> and <ruby value=ruby>ruby</ruby>, which are not supported by the Unity standard.
+There is also a <s>strikeout line</s>.
+
+【Kohaku】
+The following is a sample of the choices.
+As with Kirikiri, it jumps to the defined label.
+The label definition is also * (one-byte character) as in Kirikiri.
+
+[seladd target=*answer1 text=choice1]
+[seladd target=*answer2 text=choice2]
+[seladd target=*answer3 text=choice3]
+[select].
+
+*answer1
+
+【Kohaku】
+Option1.
+
+[jump target=*Join]
+
+*answer2
+
+【Kohaku】
+Option2.
+
+[jump target=*Join]
+
+*answer3
+
+【Kohaku】
+Option 3.
+
+*Join
+
+【Kohaku】
+It worked out well.
+
+【Yuko】
+About Variables. System variables (sf), temporary variables (tf), such as
+There is no classification. Everything is treated as a game variable.
+
+【Yuko】
+Other than that, the rules are almost the same name as KAG.
+
+【Kohaku】
+Alphanumeric characters and underscores can be used (double-byte characters are not allowed).
+However, a single-byte number cannot come at the beginning.
+You are free to name it if it is
+
+【Kohaku】
+Variables are displayed by enclosing the variable name with #.
+The following text is a sample.
+
+[eval exp=myoji='Ohtori']
+[eval exp=name='Kohaku'].
+
+[#name#]
+My name is #myoji# Kohaku.
+
+【Kohaku】
+It looks like this.
+
+【Yuko】
+The next section describes the branching.
+
+【Yuko】
+Like Kirikiri(吉里吉里) with Jump tag.
+Transitions to labels containing other files.
+
+【Yuko】
+It will be a separate file from the next message.
+
+[jump storage=scenario/tutorial1_2]
+
