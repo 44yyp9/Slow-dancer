@@ -821,6 +821,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
   m_Softness: {x: 0, y: 0}
+--- !u!1 &498511137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1729808701845154, guid: 83d76c4c4c63e5b4991a11b6574d707f, type: 3}
+  m_PrefabInstance: {fileID: 1921882190}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &503748633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,6 +1929,7 @@ GameObject:
   - component: {fileID: 1205037852}
   - component: {fileID: 1205037851}
   - component: {fileID: 1205037850}
+  - component: {fileID: 1205037855}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -2037,6 +2043,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1205037855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205037849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c590339b1a299f40b334d071436ce23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TextWindow: {fileID: 498511137}
+  NextSceneName: SelectingStageScene
 --- !u!1001 &1322096089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3018,7 +3038,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114448747802568994, guid: 83d76c4c4c63e5b4991a11b6574d707f, type: 3}
   m_PrefabInstance: {fileID: 1921882190}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 498511137}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf63e70a4ec3f4627970cd7c6b5315f5, type: 3}
