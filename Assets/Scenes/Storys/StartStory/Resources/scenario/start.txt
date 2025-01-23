@@ -1,0 +1,7 @@
+[image layer=0 storage=black]
+[image layer=1 storage=image/BG/BackGroundAbandonedBuilding]
+
+;不備のエラーによりインデックスの漏れが出るエラーのため
+;tutorial_JP→tutorialの順でシナリオが進行する
+
+[jump storage=scenario/tutorial_JP]

@@ -1672,7 +1672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoJsonPath: Save/AutoSaveData.json
-  startStoryScene: StartScene
+  startStoryScene: StartStory
 --- !u!1 &641028666
 GameObject:
   m_ObjectHideFlags: 0
