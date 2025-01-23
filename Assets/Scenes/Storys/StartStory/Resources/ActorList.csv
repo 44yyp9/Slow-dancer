@@ -1,5 +1,7 @@
-name,prefix,hasVoice
-男性１,male,false
-女性１,female,false
-子供１,child,false
+prefix,ボイス有無,JP,EN
+narrator,false,ナレーター,narrator
+kohaku,true,こはく,Kohaku
+misaki,true,みさき,Misaki
+yuko,true,ゆうこ,Yuko
+
 
