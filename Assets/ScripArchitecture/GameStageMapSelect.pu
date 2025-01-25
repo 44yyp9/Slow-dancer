@@ -26,6 +26,11 @@ enum Costumes{
     Costume2
 }
 PossessionCostumes -left-> Costumes
+class PossessionCoin{
+    +{static}int possessionCoin
+    +void addCoin(int coin)
+    +void removeCoin(int coin)
+}
 namespace Model{
     class SelectStageOptionModel{
         -GameObject sabWindow
@@ -84,6 +89,12 @@ namespace Model{
         +void changeCostume(Costumes costumes)
     }
     CostumeSelectingModel -up-> PossessionCostumes
+    class PossessionCoinModel{
+        -PossessionCoin possessionCoin
+        +int possessionCoin
+        +void readCoin()
+    }
+    PossessionCoinModel -up-> PossessionCoin
 }
 namespace Presenter{
     class SelectStageOptionPresenter{
@@ -126,6 +137,11 @@ namespace Presenter{
         -CostumeSelectingView costumeSelectingView
         +void sbuscribe()
     }
+    class PossessionCoinPresenter{
+        -PossessionCoinModel possessionCoinModel
+        -PossessionCoinView possessionCoinView
+        +void sbuscribe()
+    }
 }
 SelectStageOptionPresenter -up-> SelectStageOptionModel
 SelectStageOptionPresenter -down-> View.SelectStageOptionView
@@ -143,8 +159,10 @@ CostumeSelectingOptionPresenter -up-> CostumeSelectingOptionModel
 CostumeSelectingOptionPresenter -down-> View.CostumeSelectingOptionView
 CostumeSelectingPresenter -up-> CostumeSelectingModel
 CostumeSelectingPresenter -down-> View.CostumeSelectingView
+PossessionCoinPresenter -up-> PossessionCoinModel
+PossessionCoinPresenter -down-> View.PossessionCoinView
 namespace View{
-    class UIButtonViewTemplate{
+    abstract class UIButtonViewTemplate{
         +void onClick()
         +void onHover()
     }
@@ -182,6 +200,10 @@ namespace View{
         +void onHover()
     }
     CostumeSelectingView .down.> UIButtonViewTemplate
+    class PossessionCoinView{
+        +int possessionCoin
+        +void ShowCoin()
+    }
 }
 struct StageScoreStruct{
     bool Clear,
