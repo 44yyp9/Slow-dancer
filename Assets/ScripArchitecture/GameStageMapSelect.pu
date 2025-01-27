@@ -164,19 +164,16 @@ PossessionCoinPresenter -down-> View.PossessionCoinView
 namespace View{
     abstract class UIButtonViewTemplate{
         +void onClick()
-        +void onHover()
+        + virtual void onEnterMouseButton()
+        + virtual void onExitMouseButton()
     }
     class SelectStageOptionView{
-        +void onHover()
     }
     class SelectStageSaveDatasView{
-        +void onHover()
     }
     class SelectStageSaveView{
-        +void onHover()
     }
     class CostumeSelectingOptionView{
-        +void onHover()
     }
     SelectStageOptionView .down.> UIButtonViewTemplate
     SelectStageSaveDatasView .down.> UIButtonViewTemplate
