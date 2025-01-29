@@ -5,5 +5,9 @@ using UniRx;
 
 public class PossessionCoinModel : MonoBehaviour
 {
-
+    public ReactiveProperty<int> possessionCoin;
+    public void readCoin()
+    {
+        possessionCoin.Value = PossessionCoin.possessionCoin;
+    }
 }

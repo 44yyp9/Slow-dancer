@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class CostumeSelectingOptionPresenter : MonoBehaviour
+public class CostumesSelectingClosedPresenter : MonoBehaviour
 {
-    [SerializeField] private CostsumeSelectingOptionView view;
     [SerializeField] private CostumeSelectingOptonModel model;
+    [SerializeField] private CostsumeSelectingOptionView view;
     private void Start()
     {
         view.clicked(onButtonClicked);
     }
     private void onButtonClicked()
     {
-        model.openWindow();
+        model.closeWindow();
     }
 }

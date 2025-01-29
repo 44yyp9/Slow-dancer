@@ -31,8 +31,8 @@ public class SaveDataController
         json = File.ReadAllText(jsonPath);
         var saveData=JsonUtility.FromJson<SaveDataStruct.SaveData>(json);
         //以下にデータの上書き
-        saveData.OpenedSatage = Map.movigMaxRange;
-        saveData.Coins = GettingCoin.havingCoin;
+        saveData.OpenedSatage = StagesMapModel.opendStage;
+        saveData.Coins = PossessionCoin.possessionCoin;
         saveData.Cosutumes = saveData.Cosutumes; //ここのスキン選択は保留
         saveData.StagesScore = saveData.StagesScore; //ここのステージのスコアも保留
         //上書きしたデータをjsonに上書き
@@ -45,8 +45,8 @@ public class SaveDataController
         json=File.ReadAllText(jsonPath);
         data = JsonUtility.FromJson<SaveDataStruct.SaveData>(json);
         //以下にゲーム内データのシングルトンを呼び出しjsonファイルのデータに上書き
-        Map.movigMaxRange=data.OpenedSatage;
-        GettingCoin.havingCoin=data.Coins;
+        StagesMapModel.opendStage=data.OpenedSatage;
+        PossessionCoin.possessionCoin=data.Coins;
         var i3=data.StagesScore; //ここのステージのスコアも保留
         var i4=data.Cosutumes; //ここのスキン選択は保留
     }
