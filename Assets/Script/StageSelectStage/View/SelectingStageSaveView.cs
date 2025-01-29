@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class SelectingStageSaveView : MonoBehaviour
+public class SelectingStageSaveView : UIViewTemplate
 {
 
 }
