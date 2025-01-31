@@ -1,7 +1,9 @@
 {
     "Accessed":false,
     "//":"アクセスできるステージの数",
-    "OpenedStages":0,
+    "OpenedStages":3,
+    "//":"プレイヤーの位置情報",
+    "PlayerMapPosition":3,
     "//":"コインの残りの枚数",
     "Coins":0,
     "//":"プレイヤーの保持している服",
@@ -15,29 +17,29 @@
     "//":"各種ステージのスコア",
     "StagesScore":[
         {
-            "Stage1":false,
+            "IsCleared":false,
+            "HighScore":1,
+            "SecondScore":2,
+            "ThirdScore":3
+        },{
+            "IsCleared":false,
             "HighScore":0,
-            "SencondScore":0,
+            "SecondScore":0,
             "ThirdScore":0
         },{
-            "Stage2":false,
+            "IsCleared":false,
+            "HighScore":2,
+            "SecondScore":2,
+            "ThirdScore":2
+        },{
+            "IsCleared":false,
             "HighScore":0,
-            "SencondScore":0,
+            "SecondScore":0,
             "ThirdScore":0
         },{
-            "Stage3":false,
+            "IsCleared":false,
             "HighScore":0,
-            "SencondScore":0,
-            "ThirdScore":0
-        },{
-            "Stage4":false,
-            "HighScore":0,
-            "SencondScore":0,
-            "ThirdScore":0
-        },{
-            "Stage5":false,
-            "HighScore":0,
-            "SencondScore":0,
+            "SecondScore":0,
             "ThirdScore":0
         }
     ]

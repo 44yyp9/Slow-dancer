@@ -11,9 +11,9 @@ public class PlayerMapPosionPresenter : MonoBehaviour
     {
         //Žn‚ß‚Ì‰ŠúˆÊ’u‚Ì’è‹`
         model.movePlayerVector();
+        model.playerVectorPosition.Subscribe(_ => view.playerPosition = model.playerVectorPosition).AddTo(this);
         view.setPlayerPosition();
         assignKey();
-        model.playerVectorPosition.Subscribe(_ => view.playerPosition=model.playerVectorPosition).AddTo(this);
     }
     private void assignKey()
     {

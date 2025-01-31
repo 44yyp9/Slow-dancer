@@ -2056,7 +2056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TextWindow: {fileID: 498511137}
-  NextSceneName: SelectingStageScene
+  NextSceneName: SelectingStageMap
 --- !u!1001 &1322096089
 PrefabInstance:
   m_ObjectHideFlags: 0
