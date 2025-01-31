@@ -31,10 +31,11 @@ public class SaveDataController
         json = File.ReadAllText(jsonPath);
         var saveData=JsonUtility.FromJson<SaveDataStruct.SaveData>(json);
         //以下にデータの上書き
-        saveData.OpenedSatage = Map.movigMaxRange;
-        saveData.Coins = GettingCoin.havingCoin;
-        saveData.Cosutumes = saveData.Cosutumes; //ここのスキン選択は保留
-        saveData.StagesScore = saveData.StagesScore; //ここのステージのスコアも保留
+        saveData.OpenedStages = StagesMapModel.opendStage;
+        saveData.Coins = PossessionCoin.possessionCoin;
+        saveData.PlayerMapPosition=PlayerMapPositionModel.playerMapPositon;
+        //saveData.Cosutumes = saveData.Cosutumes; ここのスキン選択は保留
+        saveData.StagesScore = StagesScore.stagesScore.StagesScore; //ここのステージのスコアも保留
         //上書きしたデータをjsonに上書き
         json = JsonUtility.ToJson(saveData);
         File.WriteAllText (jsonPath, json);
@@ -45,10 +46,11 @@ public class SaveDataController
         json=File.ReadAllText(jsonPath);
         data = JsonUtility.FromJson<SaveDataStruct.SaveData>(json);
         //以下にゲーム内データのシングルトンを呼び出しjsonファイルのデータに上書き
-        Map.movigMaxRange=data.OpenedSatage;
-        GettingCoin.havingCoin=data.Coins;
-        var i3=data.StagesScore; //ここのステージのスコアも保留
-        var i4=data.Cosutumes; //ここのスキン選択は保留
+        StagesMapModel.opendStage=data.OpenedStages;
+        PossessionCoin.possessionCoin=data.Coins;
+        PlayerMapPositionModel.playerMapPositon=data.PlayerMapPosition;
+        StagesScore.stagesScore.StagesScore =data.StagesScore;
+        //var i4=data.Cosutumes; ここのスキン選択は保留
     }
     public string debugTest(string jsonPath)
     {

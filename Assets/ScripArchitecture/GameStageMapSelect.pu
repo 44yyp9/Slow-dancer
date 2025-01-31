@@ -1,0 +1,218 @@
+@startuml GameStageMapSelectMap
+    interface ISabWindowControllerable{
+        //既存にあるinterfaceを使う
+        +void openWindow()
+        +void closeWindow()
+    }
+class StagesScore{
+    +stageScoreStruct stageScoreStruct
+    +{static}List<StageScoreStruct> stagesScore
+    +stageScoreStruct getStageScores(int stage)
+    //ここで現在のゲームスコアを一度だけstart,loadで読み込む
+    +void setStageScores()
+    +stageScoreStruct getStagesScore()
+}
+class PossessionCostumes{
+    +{static}Costumes nowCostumes
+    +{static}Costumes possessionCostumes
+    +void setCostumes(Costumes costumes)
+    +void setCostumes()
+    +Costumes getCostumes()
+}
+enum Costumes{
+    //boolで定義しゲーム開始時に読み込む
+    Normal,
+    Costume1,
+    Costume2
+}
+PossessionCostumes -left-> Costumes
+class PossessionCoin{
+    +{static}int possessionCoin
+    +void addCoin(int coin)
+    +void removeCoin(int coin)
+}
+namespace Model{
+    class SelectStageOptionModel{
+        -GameObject sabWindow
+        +void openWindow()
+        +void closeWindow()
+        //あとはstartSceneで作ったコードを使い回す
+        //ただsaveはないのでここで作る
+    }
+    SelectStageOptionModel .up.> ISabWindowControllerable
+    SelectSatageSaveDatasModel .up.> ISabWindowControllerable
+    CostumeSelectingOptionModel .up.> ISabWindowControllerable
+    class SelectSatageSaveDatasModel{
+        //ここも使い回せる
+        -GameObject saveWindow
+        +void openWindow()
+        +void closeWindow()
+    }
+    class SelectStageSaveModel{
+        -SaveDataController saveDataController
+        -string saveDataPath
+        +void saveGame()
+    }
+    class PlayerPositionModel{
+        +Transform currentPosition
+        -StagesMapModel stagesMapModel
+        +int currentStage
+        -int forwardStage()
+        -int backStage()
+    }
+    class StagesMapModel{
+        {static}int OpenedStage
+        -List<Stage> stages
+        +Transform isStagePosition(int stage)
+        +string getStageName(int stage)
+    }
+    class DecisionStageModel{
+        -StagesMapModel stagesMapModel
+        +void decideStage()
+    }
+    PlayerPositionModel -right-> StagesMapModel
+    DecisionStageModel -up-> StagesMapModel
+    class StageScoreModel{
+        -StageScoreStruct stageScoreStruct
+        -StagesScore stageScores
+        +void readScore()
+    }
+    StageScoreModel -up-> StagesScore
+    class CostumeSelectingOptionModel{
+        -GameObject costumeWindow
+        +void openWindow()
+        +void closeWindow()
+    }
+    class CostumeSelectingModel{
+        //ここの設計ちょっと怪しい
+        -PossessionCostumes possessionCostumes
+        +void changeCostume(Costumes costumes)
+    }
+    CostumeSelectingModel -up-> PossessionCostumes
+    class PossessionCoinModel{
+        -PossessionCoin possessionCoin
+        +int possessionCoin
+        +void readCoin()
+    }
+    PossessionCoinModel -up-> PossessionCoin
+}
+namespace Presenter{
+    class SelectStageOptionPresenter{
+        -SelectStageOptionModel selectStageOptionModel
+        -SelectStageOptionView selectStageOptionView
+        +void sbuscribe()
+    }
+    class SelectStageSaveDatasPresenter{
+        -SelectSatageSaveDatasModel selectSatageSaveDatasModel
+        -SelectStageSaveDatasView selectStageSaveDatasView
+        +void sbuscribe()
+    }
+    class SelectStageSavePresenter{
+        -SelectStageSaveModel selectStageSaveModel
+        -SelectStageSaveView selectStageSaveView
+        +void sbuscribe()
+    }
+    class PlayerPositionPresenter{
+        -PlayerPositionModel playerPositionModel
+        -PlayerPositionView playerPositionView
+        +void sbuscribe()
+    }
+    class DecisionStagePresenter{
+        -DecisionStageModel decisionStageModel
+        -DecisionStageView decisionStageView
+        +void sbuscribe()
+    }
+    class StageScorePresenter{
+        -StageScoreModel stageScoreModel
+        -StageScoreView stageScoreView
+        +void sbuscribe()
+    }
+    class CostumeSelectingOptionPresenter{
+        -CostumeSelectingOptionModel costumeSelectingOptionModel
+        -CostumeSelectingOptionView costumeSelectingOptionView
+        +void sbuscribe()
+    }
+    class CostumeSelectingPresenter{
+        -CostumeSelectingModel costumeSelectingModel
+        -CostumeSelectingView costumeSelectingView
+        +void sbuscribe()
+    }
+    class PossessionCoinPresenter{
+        -PossessionCoinModel possessionCoinModel
+        -PossessionCoinView possessionCoinView
+        +void sbuscribe()
+    }
+}
+SelectStageOptionPresenter -up-> SelectStageOptionModel
+SelectStageOptionPresenter -down-> View.SelectStageOptionView
+SelectStageSaveDatasPresenter -up-> SelectSatageSaveDatasModel
+SelectStageSaveDatasPresenter -down-> View.SelectStageSaveDatasView
+SelectStageSavePresenter -up-> SelectStageSaveModel
+SelectStageSavePresenter -down-> View.SelectStageSaveView
+PlayerPositionPresenter -up-> PlayerPositionModel
+PlayerPositionPresenter -down-> View.PlayerPositionView
+DecisionStagePresenter -up-> DecisionStageModel
+DecisionStagePresenter -down-> View.DecisionStageView
+StageScorePresenter -up-> StageScoreModel
+StageScorePresenter -down-> View.StageScoreView
+CostumeSelectingOptionPresenter -up-> CostumeSelectingOptionModel
+CostumeSelectingOptionPresenter -down-> View.CostumeSelectingOptionView
+CostumeSelectingPresenter -up-> CostumeSelectingModel
+CostumeSelectingPresenter -down-> View.CostumeSelectingView
+PossessionCoinPresenter -up-> PossessionCoinModel
+PossessionCoinPresenter -down-> View.PossessionCoinView
+namespace View{
+    abstract class UIButtonViewTemplate{
+        +void onClick()
+        + virtual void onEnterMouseButton()
+        + virtual void onExitMouseButton()
+    }
+    class SelectStageOptionView{
+    }
+    class SelectStageSaveDatasView{
+    }
+    class SelectStageSaveView{
+    }
+    class CostumeSelectingOptionView{
+    }
+    SelectStageOptionView .down.> UIButtonViewTemplate
+    SelectStageSaveDatasView .down.> UIButtonViewTemplate
+    SelectStageSaveView .down.> UIButtonViewTemplate
+    CostumeSelectingOptionView .down.> UIButtonViewTemplate
+    class PlayerPositionView{
+        +Transform currentPosition
+        +void InputChangePosition()
+    }
+    class DecisionStageView{
+        +void InputDecideStage()
+    }
+    class StageScoreView{
+        //enumでclear,highscore,lowscoreなどを作る
+        //UniRXでenumを監視して変更を検知する
+        //UniRXとstructの嚙み合わせによって設計は変わる
+        StageScoreStruct stageScoreStruct
+        +void ShowScores()
+    }
+    class CostumeSelectingView{
+        +void onHover()
+    }
+    CostumeSelectingView .down.> UIButtonViewTemplate
+    class PossessionCoinView{
+        +int possessionCoin
+        +void ShowCoin()
+    }
+}
+struct StageScoreStruct{
+    bool Clear,
+    int HighScore,
+    int SecondScore,
+    int ThirdScore
+}
+StageScoreView -up-> StageScoreStruct
+StageScoreModel -down-> StageScoreStruct
+StagesScore -down-> StageScoreStruct
+
+@enduml
+
+
+//シングルトンで他のプレイヤーの情報を書かねばいかない

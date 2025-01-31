@@ -10,7 +10,8 @@ public class SaveDataStruct
     public struct SaveData
     {
         public bool Accessed;
-        public int OpenedSatage;
+        public int OpenedStages;
+        public int PlayerMapPosition;
         public int Coins;
         [Serializable]
         public struct Costume

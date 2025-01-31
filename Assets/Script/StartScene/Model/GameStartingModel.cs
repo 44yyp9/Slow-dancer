@@ -23,6 +23,7 @@ public class GameStartingModel : MonoBehaviour
         saveDataController.create(autoJsonPath);
         //新規データからゲーム内データに反映
         saveDataController.load(autoJsonPath);
+        Debug.Log(PlayerMapPositionModel.playerMapPositon);
     }
     private void goToMovie()
     {
