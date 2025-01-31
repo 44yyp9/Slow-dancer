@@ -212,6 +212,36 @@ StageScoreView -up-> StageScoreStruct
 StageScoreModel -down-> StageScoreStruct
 StagesScore -down-> StageScoreStruct
 
+namespace Camera{
+    class SelectingStageCameraManeger{
+        -SelectingStageCameraPotion cameraPotion
+        -SelectingStageZoominCamera zoominCamera
+        +void Main()
+    }
+    class SelectingStageCameraPotion{
+        -GameObject camera
+        -PlayerPositionModel playerPositionModel
+        +Vector3 isCameraPosition() 
+        +void adulationAnimation()
+    }
+    class SelectingStageZoominCamera{
+        -GameObject camera
+        +void zoomin()
+        +void zoomout()
+    }
+    abstract class CameraPositionBase{
+        +Vector3 isCameraPosition()
+    }
+    abstract class CameraZoomBase{
+        +void zoomin()
+        +void zoomout()
+    }
+    SelectingStageCameraManeger -up-> SelectingStageCameraPotion
+    SelectingStageCameraManeger -up-> SelectingStageZoominCamera
+    SelectingStageCameraPotion .up.> CameraPositionBase
+    SelectingStageZoominCamera .up.> CameraZoomBase
+}
+
 @enduml
 
 

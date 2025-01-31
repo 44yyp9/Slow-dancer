@@ -193,16 +193,30 @@ namespace ActionGame {
             -float scrollingValue
             +void scrolling()
         }
+        class CameraRotation{
+            +Transform playerTransform
+            -float rotationSpeed
+            -float rotationValue
+            +void rotation()
+        }
         class CameraManeger{
             +IPauseable iPauseable
             +GameObject player
             +CameraZooming cameraZooming
             +CameraScrolling cameraScrolling
+            +CameraRotation cameraRotation
             +void cameraZooming()
             +void cameraScrolling()
+            +void cameraRotation()
+        }
+        abstract class CameraZoomBase{
+            +void zoomin()
+            +void zoomout()
         }
         CameraManeger -down->CameraZooming
         CameraManeger -down->CameraScrolling
+        CameraManeger -down->CameraRotation
+        CameraZooming .down.>CameraZoomBase
     }
     namespace Enemy{
         class EnemyHP{
