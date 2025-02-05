@@ -40,6 +40,7 @@ public class StageScoreModel : MonoBehaviour
     }
     private void Start()
     {
+        debugTest();
         changeScoreText();
         //プレイヤーの位置が変化すると発火するようにする
         playerPosition.ObservablePlayerMapPosition.Subscribe(_ => changeScoreText()).AddTo(this);

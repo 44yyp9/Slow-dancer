@@ -1,0 +1,73 @@
+@startuml ResultSceneArchitecture
+namespace View{
+    class ResultScoreView{
+        -GameObject scoreText
+        -GameObject rankText
+        +string score
+        +string rank
+        //UniRXを用いて発火
+        +void showScore()
+    }
+    class ResultStandingPictureView{
+        -GameObject standingPicture
+        +void showStandingPicture()
+    }
+    class ChangeSceneButtonView{
+    }
+    ChangeSceneButtonView .up.> UITemplateView
+}
+namespace Presenter{
+    class ResultScorePresenter{
+        -ResultScoreModel model
+        -ResultScoreView view
+        -ResultStandingPicturePresenter standingPicturePresenter
+        +void subscribe()
+        //本来はよくないがPresenterがPresenterを呼び出す
+        +void setStandingPicture()
+    }
+    class ResultStandingPicturePresenter{
+        -ResultStandingPictureModel model
+        -ResultStandingPictureView view
+        +void setStandingPicture()
+    }
+    ResultScorePresenter -left-> ResultStandingPicturePresenter
+    class ChangeSceneButtonPresenter{
+        -ChangeSceneButtonModel model
+        -ChangeSceneButtonView view
+        +void subscribe()
+    }
+}
+
+namespace Model{
+    class ResultScoreModel{
+        +string score
+        +string rank
+        -Rank _rank
+        -UIScoreView uiScoreModel
+        +void setResult()
+        -string getRank()
+        -string getScore()
+    }
+    enum Rank{
+        S,A,B,C,D,E
+    }
+    ResultScoreModel --> Rank
+    class ResultStandingPictureModel{
+        -GameObject standingPicture
+        -List<sprite> standingPictureList
+        +void setStandingPicture()
+    }
+    class ChangeSceneButtonModel{
+        -string sceneName
+        +void changeScene()
+    }
+}
+ResultScorePresenter -up-> ResultScoreView
+ResultScorePresenter -down-> ResultScoreModel
+ResultStandingPicturePresenter -up-> ResultStandingPictureView
+ResultStandingPicturePresenter -down-> ResultStandingPictureModel
+ChangeSceneButtonPresenter -up-> ChangeSceneButtonView
+ChangeSceneButtonPresenter -down-> ChangeSceneButtonModel
+
+
+@enduml
