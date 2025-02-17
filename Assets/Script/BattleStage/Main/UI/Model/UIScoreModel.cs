@@ -8,8 +8,11 @@ public class UIScoreModel : MonoBehaviour
     [SerializeField] private UIComboModel comboModel;
     [SerializeField] private UICoinModel coinModel;
     public ReactiveProperty<int> score = new ReactiveProperty<int>(0);
+    public static int _score = 0;
     private void Start()
     {
+        //èâä˙ílÇÃê›íË
+        _score = 0;
         subscribeCombo();
         subscribeCoin();
     }
@@ -43,6 +46,7 @@ public class UIScoreModel : MonoBehaviour
         {
             var increment = value.Value - _combo.Value;
             score.Value += addCombo(increment);
+            _score=score.Value;
             _combo.Value = value.Value;
         }
     }
@@ -54,6 +58,7 @@ public class UIScoreModel : MonoBehaviour
         {
             var increment = value.Value - _totalCoin.Value;
             score.Value += addCoin(increment);
+            _score=score.Value;
             _totalCoin.Value = value.Value;
         }
     }
