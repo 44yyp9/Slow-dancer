@@ -1,0 +1,22 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "Player_Anima_ver3.moc3",
+		"Textures": [
+			"Player_Anima_ver3.1024/texture_00.png"
+		],
+		"DisplayInfo": "Player_Anima_ver3.cdi3.json"
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": []
+		},
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		}
+	]
+}

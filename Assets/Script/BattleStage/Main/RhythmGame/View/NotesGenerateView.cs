@@ -7,6 +7,8 @@ public class NotesGenerateView : MonoBehaviour
 {
 
     private ReactiveProperty<List<float>> _notesData = new ReactiveProperty<List<float>>();
+    //presenterÇ©ÇÁPlayerControllerÇ…çwì«Ç≥ÇπÇÈ
+    public ReactiveProperty<int> noteOrdered;
     public ReactiveProperty<List<float>> notesData
     {
         get { return _notesData; }
@@ -25,6 +27,7 @@ public class NotesGenerateView : MonoBehaviour
         for(int i = 0; notes.Count > i; i++)
         {
             float delayTime = notes[i];
+            noteOrdered = new ReactiveProperty<int>(i);
             while (delayTime > 0 )
             {
                 if (GameTime.playingTime == 0)
