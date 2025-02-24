@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class JumpAnimation : PlayerAnimationBase
+public class ForwardRunAnimation : PlayerAnimationBase
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -22,5 +22,4 @@ public class JumpAnimation : PlayerAnimationBase
     {
 
     }
-
 }

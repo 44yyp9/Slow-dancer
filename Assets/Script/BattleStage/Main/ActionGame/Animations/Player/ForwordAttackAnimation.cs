@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class IdelAnimation : PlayerAnimationBase
+public class ForwordAttackAnimation :  PlayerAnimationBase
 {
-    private InputForwardWalkHandler inputForwardWalkHandler;
-    private InputForwardAttackHandler inputForwardAttackHandler;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         setAnimationManeger(animator);
@@ -22,17 +20,15 @@ public class IdelAnimation : PlayerAnimationBase
     }
     public override void nextAnimation()
     {
-        //インスタンスの生成
-        inputForwardWalkHandler = new InputForwardWalkHandler();
-        //入力の実装
-        if (inputForwardWalkHandler.GetKey())
+        var inputWalk = new InputForwardWalkHandler();
+        if (inputWalk.GetKey())
         {
             animationManeger.playerAnimator.Play("A_walk");
         }
-        inputForwardAttackHandler = new InputForwardAttackHandler();
-        if (inputForwardAttackHandler.GetKey())
+        //ここのコードは修正必須
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            animationManeger.playerAnimator.Play("A_Attac_horizon");
+            animationManeger.playerAnimator.Play("A_idle");
         }
     }
 }

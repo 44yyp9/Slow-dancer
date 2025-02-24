@@ -137,6 +137,7 @@ namespace ActionGame {
                 Damageing,
                 Normal
             }
+            PlayerAnimationManeger -->PlayerTag
             interface IAnimation{
                 +void nextAnimetion()
             }
