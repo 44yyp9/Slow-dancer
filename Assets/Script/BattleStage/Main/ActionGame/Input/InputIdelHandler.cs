@@ -6,7 +6,7 @@ using UniRx;
 public class InputIdelHandler:InputHandlerBase
 {
     private KeyCode key2 = KeyCode.K;
-    private KeyCode button = KeyCode.Joystick1Button0; //Å†
+    private KeyCode button = KeyCode.Joystick1Button3; //Å¢
     public override bool inputKey()
     {
         var _ = false;

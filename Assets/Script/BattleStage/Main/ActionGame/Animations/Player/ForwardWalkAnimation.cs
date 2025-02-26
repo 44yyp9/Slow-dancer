@@ -22,12 +22,25 @@ public class ForwardWalkAnimation: PlayerAnimationBase
     }
     public override void nextAnimation()
     {
+        var isCombo=animationManeger.isCombo();
         var inputAttack=new InputForwardAttackHandler();
         if (inputAttack.GetKey())
         {
             transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
         }
-        var inputIdelHandler=new InputForwardWalkHandler();
+        var inputForwardRunHandler = new InputForwardRunHandler();
+        if (isCombo&&inputForwardRunHandler.GetKey())
+        {
+            //é¿ç€ÇÕjampíÜÇµÇ©Ç≈Ç´Ç»Ç¢ÇÃÇ≈íçà”
+            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky.ToString());
+        }
+        else if (!isCombo&&inputForwardRunHandler.GetKey())
+        {
+            //é¿ç€ÇÕjampíÜÇµÇ©Ç≈Ç´Ç»Ç¢ÇÃÇ≈íçà”
+            Debug.Log(PlayerAnimatioName.Miss_Forward_Run_Sky.ToString());
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky.ToString());
+        }
+        var inputIdelHandler =new InputForwardWalkHandler();
         if (inputIdelHandler.upButton())
         {
             transNextAnimation(PlayerAnimatioName.Idel.ToString());

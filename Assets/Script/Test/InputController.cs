@@ -7,11 +7,18 @@ namespace Test
 {
     public class InputController : MonoBehaviour
     {
+        int Test = 0;
+        private void Start()
+        {
+            Test = 0;
+        }
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Joystick1Button0))
+            var inputManeger = new InputPlayerManeger();
+            if (inputManeger.inputHandler())
             {
-                Debug.Log("a");
+                Test++;
+                Debug.Log("test"+Test.ToString());
             }
         }
     }

@@ -68,7 +68,6 @@ public abstract class PlayerAnimationBase:StateMachineBehaviour
         //計算は正しいはずなのに上手く行かない
         var scale = sine * amplitude * 3f;
         animationManeger.playerAnimator.speed = scale;
-        Debug.Log(Mathf.Sin(progressesTime * frequency));
     }
 //AnimationSpeedを次のアニメーションに行くときに1に戻す
 private void resetAnimationSpeed()

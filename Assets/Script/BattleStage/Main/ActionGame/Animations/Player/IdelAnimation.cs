@@ -21,6 +21,7 @@ public class IdelAnimation : PlayerAnimationBase
     }
     public override void nextAnimation()
     {
+        var isCombo = animationManeger.isCombo();
         //インスタンスの生成
         var inputForwardWalkHandler = new InputForwardWalkHandler();
         //入力の実装
@@ -33,7 +34,19 @@ public class IdelAnimation : PlayerAnimationBase
         {
             transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
         }
-      　var inputIdelHandler= new InputIdelHandler();
+        var inputForwardRunHandler =new InputForwardRunHandler();
+        if (isCombo && inputForwardRunHandler.GetKey())
+        {
+            //実際はjamp中しかできないので注意
+            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky.ToString());
+        }
+        else if (!isCombo && inputForwardRunHandler.GetKey())
+        {
+            //実際はjamp中しかできないので注意
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky.ToString());
+            //transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky.ToString());
+        }
+        var inputIdelHandler = new InputIdelHandler();
         if (inputIdelHandler.GetKey())
         {
             transNextAnimation(PlayerAnimatioName.Idel.ToString());

@@ -21,7 +21,12 @@ public class JumpForwardAttackAnimation : PlayerAnimationBase
     }
     public override void nextAnimation()
     {
-
+        //‰¼Ž~‚ß‚ÅŽÀ‘•
+        var inputAttack = new InputForwardAttackHandler();
+        if (inputAttack.GetKey())
+        {
+            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
+        }
     }
     public override void movePosition()
     {

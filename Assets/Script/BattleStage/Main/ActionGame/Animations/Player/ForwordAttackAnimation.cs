@@ -32,6 +32,12 @@ public class ForwordAttackAnimation :  PlayerAnimationBase
         {
             transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
         }
+        var inputForwardRunHandler = new InputForwardRunHandler();
+        if (inputForwardRunHandler.GetKey())
+        {
+            //é¿ç€ÇÕjampíÜÇµÇ©Ç≈Ç´Ç»Ç¢ÇÃÇ≈íçà”
+            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky.ToString());
+        }
         var inputIdelHandler = new InputIdelHandler();
         if (inputIdelHandler.GetKey())
         {
