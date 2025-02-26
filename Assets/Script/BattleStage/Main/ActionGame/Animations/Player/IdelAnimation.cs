@@ -7,7 +7,7 @@ public class IdelAnimation : PlayerAnimationBase
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        setAnimationManeger(animator);
+        setManeger(animator);
         setAnimationSpeed(stateInfo.length);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -23,31 +23,27 @@ public class IdelAnimation : PlayerAnimationBase
     {
         var isCombo = animationManeger.isCombo();
         //インスタンスの生成
-        var inputForwardWalkHandler = new InputForwardWalkHandler();
+        var inputForwardWalkHandler=new InputForwardWalkHandler();
         //入力の実装
         if (inputForwardWalkHandler.GetKey())
         {
             transNextAnimation(PlayerAnimatioName.Forward_Walk.ToString());
         }
-        var inputForwardAttackHandler = new InputForwardAttackHandler();
-        if (inputForwardAttackHandler.GetKey())
+        if (inputManeger.getInput<InputForwardAttackHandler>())
         {
             transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
         }
-        var inputForwardRunHandler =new InputForwardRunHandler();
-        if (isCombo && inputForwardRunHandler.GetKey())
+        if (isCombo && inputManeger.getInput<InputForwardRunHandler>())
         {
             //実際はjamp中しかできないので注意
             transNextAnimation(PlayerAnimatioName.Forward_Run_Sky.ToString());
         }
-        else if (!isCombo && inputForwardRunHandler.GetKey())
+        else if (!isCombo && inputManeger.getInput<InputForwardRunHandler>())
         {
             //実際はjamp中しかできないので注意
             transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky.ToString());
-            //transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky.ToString());
         }
-        var inputIdelHandler = new InputIdelHandler();
-        if (inputIdelHandler.GetKey())
+        if (inputManeger.getInput<InputIdelHandler>())
         {
             transNextAnimation(PlayerAnimatioName.Idel.ToString());
         }

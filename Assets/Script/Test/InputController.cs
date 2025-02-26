@@ -14,12 +14,14 @@ namespace Test
         }
         private void Update()
         {
+            /*
             var inputManeger = new InputPlayerManeger();
             if (inputManeger.inputHandler())
             {
                 Test++;
                 Debug.Log("test"+Test.ToString());
             }
+            */
         }
     }
 }

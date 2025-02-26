@@ -65,6 +65,7 @@ public class NotesHitterView : MonoBehaviour,IJudgmentHitable
     private void Start()
     {
         var inputManeger = new InputPlayerManeger();
-        Observable.EveryUpdate().Where(_ => inputManeger.inputHandler()).Subscribe(_ => pushNote()).AddTo(this);
+        ServiceLocator.Register(inputManeger);
+        Observable.EveryUpdate().Do(_ =>inputManeger.updateInputs()).Where(_ => inputManeger.anyInput()).Subscribe(_ => pushNote()).AddTo(this);
     }
 }

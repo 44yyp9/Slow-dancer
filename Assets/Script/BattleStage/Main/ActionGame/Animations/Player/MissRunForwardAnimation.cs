@@ -7,12 +7,13 @@ public class MissRunForwardAnimation : PlayerAnimationBase
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        setAnimationManeger(animator);
+        setManeger(animator);
         setAnimationSpeed(stateInfo.length);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        movePosition();
+        nextAnimation();
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -21,11 +22,29 @@ public class MissRunForwardAnimation : PlayerAnimationBase
     }
     public override void nextAnimation()
     {
+        var isCombo = animationManeger.isCombo();
+        //Handlerの実装は問題ないが、タグは今後変更するので注意が必要
+        if (inputManeger.getInput<InputForwardAttackHandler>())
+        {
+            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
+        }
+        if (isCombo && inputManeger.getInput<InputForwardRunHandler>())
+        {
+            //実際はjamp中しかできないので注意
+            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky.ToString());
+        }
+        else if (!isCombo && inputManeger.getInput<InputForwardRunHandler>())
+        {
+            //実際はjamp中しかできないので注意
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky.ToString());
+        }
+        //落ちるアニメーションを追加したほうがいいかも
 
     }
     public override void movePosition()
     {
-
+        var sineMovingX = calculationSine(3f);
+        animationManeger.gameObject.transform.position += new Vector3(sineMovingX, 0, 0) * GameTime.playingTime * 5f;
+        animationManeger.gameObject.transform.position += new Vector3(1.0f, 0, 0) * GameTime.playingTime * 1f;
     }
-
 }

@@ -7,12 +7,13 @@ public class ForwordAttackAnimation :  PlayerAnimationBase
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        setAnimationManeger(animator);
+        setManeger(animator);
         setAnimationSpeed(stateInfo.length);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        setSineAnimation();
+        //setSineAnimation();
+        movePosition();
         nextAnimation();
     }
 
@@ -46,7 +47,9 @@ public class ForwordAttackAnimation :  PlayerAnimationBase
     }
     public override void movePosition()
     {
-
+        var sineMovingX = calculationSine(3f);
+        animationManeger.gameObject.transform.position += new Vector3(sineMovingX, 0, 0) * GameTime.playingTime * 10f;
+        animationManeger.gameObject.transform.position += new Vector3(1.0f, 0, 0) * GameTime.playingTime * 2f;
     }
 
 }
