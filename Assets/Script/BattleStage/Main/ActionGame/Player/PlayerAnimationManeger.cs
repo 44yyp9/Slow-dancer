@@ -29,10 +29,19 @@ public class PlayerAnimationManeger:AnimationManegerBase
     {
 
     }
+    private void Start()
+    {
+        //ゲーム開始時のタグの設定
+        setTag(PlayerTag.Normal);
+    }
 }
 public enum PlayerTag
 {
     Normal, //普通の状態
     Attaking, //攻撃している状態
     Damageing //ダメージを受けている状態
+}
+public enum PlayerAnimatioName
+{
+    Idel, Forward_Ground_Attack, Back_Ground_Attack, Forward_Walk,Back_Walk
 }

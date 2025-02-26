@@ -8,9 +8,11 @@ public class ForwordAttackAnimation :  PlayerAnimationBase
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         setAnimationManeger(animator);
+        setAnimationSpeed(stateInfo.length);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        setSineAnimation();
         nextAnimation();
     }
 
@@ -23,12 +25,22 @@ public class ForwordAttackAnimation :  PlayerAnimationBase
         var inputWalk = new InputForwardWalkHandler();
         if (inputWalk.GetKey())
         {
-            animationManeger.playerAnimator.Play("A_walk");
+            transNextAnimation(PlayerAnimatioName.Forward_Walk.ToString());
         }
-        //Ç±Ç±ÇÃÉRÅ[ÉhÇÕèCê≥ïKê{
-        if (Input.GetKeyDown(KeyCode.S))
+        var inputForwardAttackHandler = new InputForwardAttackHandler();
+        if (inputForwardAttackHandler.GetKey())
         {
-            animationManeger.playerAnimator.Play("A_idle");
+            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
+        }
+        var inputIdelHandler = new InputIdelHandler();
+        if (inputIdelHandler.GetKey())
+        {
+            transNextAnimation(PlayerAnimatioName.Idel.ToString());
         }
     }
+    public override void movePosition()
+    {
+
+    }
+
 }

@@ -8,10 +8,11 @@ public class ForwardWalkAnimation: PlayerAnimationBase
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         setAnimationManeger(animator);
+        setAnimationSpeed(stateInfo.length);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animationManeger.gameObject.transform.position +=new Vector3(1,0,0) * GameTime.playingTime;
+        movePosition();
         nextAnimation();
     }
 
@@ -24,12 +25,17 @@ public class ForwardWalkAnimation: PlayerAnimationBase
         var inputAttack=new InputForwardAttackHandler();
         if (inputAttack.GetKey())
         {
-            animationManeger.playerAnimator.Play("A_Attac_horizon");
+            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
         }
-        //Ç±Ç±Ç‡èCê≥ïKê{
-        if (Input.GetKeyDown(KeyCode.S))
+        var inputIdelHandler=new InputForwardWalkHandler();
+        if (inputIdelHandler.upButton())
         {
-            animationManeger.playerAnimator.Play("A_idle");
+            transNextAnimation(PlayerAnimatioName.Idel.ToString());
         }
     }
+    public override void movePosition()
+    {
+        animationManeger.gameObject.transform.position += new Vector3(1, 0, 0) * GameTime.playingTime;
+    }
+
 }

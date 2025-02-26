@@ -6,8 +6,9 @@ using static HitterType;
 
 public class NotesHitterView : MonoBehaviour,IJudgmentHitable
 {
+    //アニメーション入力でも用いるためstatic変数を用いる
     // ノーツが重なっているかのフラグ
-    private bool isOverlaping;
+    public static bool isOverlaping;
     //入力が入ったかのフラグ
     private bool isPushing;
     //一番近いノーツの検知

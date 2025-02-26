@@ -7,7 +7,8 @@ public class BackRunAnimation : PlayerAnimationBase
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        setAnimationManeger(animator);
+        setAnimationSpeed(stateInfo.length);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -19,6 +20,10 @@ public class BackRunAnimation : PlayerAnimationBase
 
     }
     public override void nextAnimation()
+    {
+
+    }
+    public override void movePosition()
     {
 
     }

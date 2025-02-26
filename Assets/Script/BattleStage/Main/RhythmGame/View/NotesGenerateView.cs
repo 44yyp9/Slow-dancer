@@ -5,10 +5,8 @@ using UniRx;
 
 public class NotesGenerateView : MonoBehaviour
 {
-
+    public static float delayTime;
     private ReactiveProperty<List<float>> _notesData = new ReactiveProperty<List<float>>();
-    //presenterÇ©ÇÁPlayerControllerÇ…çwì«Ç≥ÇπÇÈ
-    public ReactiveProperty<int> noteOrdered;
     public ReactiveProperty<List<float>> notesData
     {
         get { return _notesData; }
@@ -26,21 +24,21 @@ public class NotesGenerateView : MonoBehaviour
     {
         for(int i = 0; notes.Count > i; i++)
         {
-            float delayTime = notes[i];
-            noteOrdered = new ReactiveProperty<int>(i);
-            while (delayTime > 0 )
+            var _delayTime = notes[i];
+            delayTime = _delayTime;
+            while (_delayTime > 0 )
             {
                 if (GameTime.playingTime == 0)
                 {
-                    delayTime += GameTime.playingTime;
+                    _delayTime += GameTime.playingTime;
                 }
                 else
                 {
-                    delayTime -= GameTime.playingTime;
+                    _delayTime -= GameTime.playingTime;
                 }
                 yield return null;
             }
-            yield return new WaitForSeconds(delayTime);
+            yield return new WaitForSeconds(_delayTime);
             Vector3 generatePosi=gameObject.transform.position;
             Instantiate(notePrefab, generatePosi, Quaternion.identity,gameObject.transform);
         }

@@ -7,7 +7,8 @@ public class UpForwardJumpAnimation : PlayerAnimationBase
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        setAnimationManeger(animator);
+        setAnimationSpeed(stateInfo.length);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -22,5 +23,8 @@ public class UpForwardJumpAnimation : PlayerAnimationBase
     {
 
     }
+    public override void movePosition()
+    {
 
+    }
 }

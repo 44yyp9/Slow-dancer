@@ -5,10 +5,10 @@ using UniRx;
 
 public class BackAttackAnimation : PlayerAnimationBase
 {
-    [SerializeField] private PlayerAnimationManeger animationManeger;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        setAnimationManeger(animator);
+        setAnimationSpeed(stateInfo.length);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -20,6 +20,10 @@ public class BackAttackAnimation : PlayerAnimationBase
         
     }
     public override void nextAnimation()
+    {
+
+    }
+    public override void movePosition()
     {
 
     }

@@ -7,7 +7,8 @@ public class ForwardRunAnimation : PlayerAnimationBase
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        setAnimationManeger(animator);
+        setAnimationSpeed(stateInfo.length);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -22,4 +23,9 @@ public class ForwardRunAnimation : PlayerAnimationBase
     {
 
     }
+    public override void movePosition()
+    {
+
+    }
+
 }

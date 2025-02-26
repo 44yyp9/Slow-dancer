@@ -5,11 +5,10 @@ using UniRx;
 
 public class IdelAnimation : PlayerAnimationBase
 {
-    private InputForwardWalkHandler inputForwardWalkHandler;
-    private InputForwardAttackHandler inputForwardAttackHandler;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         setAnimationManeger(animator);
+        setAnimationSpeed(stateInfo.length);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -18,21 +17,30 @@ public class IdelAnimation : PlayerAnimationBase
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        //Debug.Log("idel");
     }
     public override void nextAnimation()
     {
         //インスタンスの生成
-        inputForwardWalkHandler = new InputForwardWalkHandler();
+        var inputForwardWalkHandler = new InputForwardWalkHandler();
         //入力の実装
         if (inputForwardWalkHandler.GetKey())
         {
-            animationManeger.playerAnimator.Play("A_walk");
+            transNextAnimation(PlayerAnimatioName.Forward_Walk.ToString());
         }
-        inputForwardAttackHandler = new InputForwardAttackHandler();
+        var inputForwardAttackHandler = new InputForwardAttackHandler();
         if (inputForwardAttackHandler.GetKey())
         {
-            animationManeger.playerAnimator.Play("A_Attac_horizon");
+            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
         }
+      　var inputIdelHandler= new InputIdelHandler();
+        if (inputIdelHandler.GetKey())
+        {
+            transNextAnimation(PlayerAnimatioName.Idel.ToString());
+        }
+    }
+    public override void movePosition()
+    {
+        //移動はしない
     }
 }

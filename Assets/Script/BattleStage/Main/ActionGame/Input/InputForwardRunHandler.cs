@@ -6,10 +6,21 @@ using UniRx;
 public class InputForwardRunHandler : InputHandlerBase
 {
     private KeyCode key = KeyCode.D;
-    public override bool input()
+    private KeyCode key2 = KeyCode.K;
+    private KeyCode button = KeyCode.Joystick1Button0; //Å†
+    public override bool inputKey()
     {
         var _ = false;
-        if (Input.GetKeyDown(key))
+        if (Input.GetKey(key) && Input.GetKey(key2))
+        {
+            _ = true;
+        }
+        return _;
+    }
+    public override bool inputController()
+    {
+        var _ = false;
+        if (inputRightPad() && Input.GetKey(button))
         {
             _ = true;
         }
