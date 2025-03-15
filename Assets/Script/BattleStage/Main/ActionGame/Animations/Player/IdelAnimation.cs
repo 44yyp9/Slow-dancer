@@ -27,6 +27,7 @@ public class IdelAnimation : PlayerAnimationBase
         //ì¸óÕÇÃé¿ëï
         if (inputForwardWalkHandler.GetKey())
         {
+            Debug.Log("walk");
             transNextAnimation(PlayerAnimatioName.Forward_Walk.ToString());
         }
         if (inputManeger.getInput<InputForwardAttackHandler>())
@@ -35,6 +36,7 @@ public class IdelAnimation : PlayerAnimationBase
         }
         if (isCombo && inputManeger.getInput<InputForwardRunHandler>())
         {
+            Debug.Log("Run");
             //é¿ç€ÇÕjampíÜÇµÇ©Ç≈Ç´Ç»Ç¢ÇÃÇ≈íçà”
             transNextAnimation(PlayerAnimatioName.Forward_Run_Sky.ToString());
         }

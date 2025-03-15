@@ -57,12 +57,19 @@ namespace RhythmGameScene
             Notes.Sort((a, b) =>
                 Mathf.Abs(a.NoteObj.transform.position.x - keyBordPosiX)
                 .CompareTo(Mathf.Abs(b.NoteObj.transform.position.x - keyBordPosiX)));
+            bool isCombo = true;
             void realse()
             {
                 for (int i = 0; i < Notes.Count; i++)
                 {
                     if (Notes[i].NoteObj.activeInHierarchy)
                     {
+                        //あんまりよくない実装
+                        if (isCombo)
+                        {
+                            Notes[i].NoteHitter.SendCombo();
+                            isCombo = false;
+                        }
                         Notes[i].NoteHitter.jugeHide();
                         Notes.RemoveAt(i);  // インデックスで削除
                         break;
@@ -83,7 +90,7 @@ namespace RhythmGameScene
         {
             NoteHitterModel.hitNumber = 0;
             InputHandler = new NoteInputHandler();
-            InputHandler.Input(RealseNote,this);
+            InputHandler.Inputed(RealseNote,this);
         }
         public void Excute()
         {

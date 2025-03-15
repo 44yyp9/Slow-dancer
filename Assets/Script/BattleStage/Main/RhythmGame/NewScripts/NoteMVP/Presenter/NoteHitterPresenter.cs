@@ -7,7 +7,7 @@ namespace RhythmGameScene
 {
     public class NoteHitterPresenter : MonoBehaviour
     {
-        [SerializeField] public NoteHitterModel _model {  get; private set; }
+        [SerializeField] public NoteHitterModel _model;
         [SerializeField] private NoteView _view;
         public void Move()
         {
@@ -16,11 +16,11 @@ namespace RhythmGameScene
         public void ShowNote()
         {
             _model.SetUpModel();
+            _model.SetAction(_view.BadHide);
             _view.Show();
         }
         public void jugeHide()
         {
-            _model.JugeHitter();
             var _hitType = _model.HitType.Value;
             if (_hitType == HitterType.hitterType.Good)
             {
@@ -30,6 +30,10 @@ namespace RhythmGameScene
             {
                 _view.BadHide();
             }
+        }
+        public void SendCombo()
+        {
+            _model.JugeHitter();
         }
     }
 }

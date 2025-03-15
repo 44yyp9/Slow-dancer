@@ -18,6 +18,7 @@ public class InputPlayerManeger
             new InputForwardAttackHandler(),
         };
         inputResults = new Dictionary<Type, bool>();
+        Debug.Log("InputPlayerManeger Instance Created");
     }
     //入力を更新するメソッド
     public void updateInputs()

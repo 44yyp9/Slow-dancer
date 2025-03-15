@@ -19,7 +19,7 @@ namespace RhythmGameScene
             var notePosiX = note.transform.position.x;
             var tagetPosiX= taget.transform.position.x;
             var posiVoluem= notePosiX - tagetPosiX; //taget‚Ì•û‚ª‘å‚«‚¢ê‡‰E‚Éi‚ß‚é
-            if (posiVoluem <= 0) speed *= -1;
+            if (posiVoluem >= 0) speed *= -1;
             //ˆÚ“®‚ÌÀ‘•
             note.transform.position += new Vector3(speed, 0, 0);
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using System;
+using RhythmGameScene;
 
 public abstract class InputHandlerBase
 {
@@ -26,7 +27,7 @@ public abstract class InputHandlerBase
     {
         var _ =false;
         //ゲーム内時間とノーツが重なっているかかの判定
-        if (GameTime.playingTime != 0 && NotesHitterView.isOverlaping)
+        if (GameTime.playingTime != 0 && NoteHitterModel.isOverlaping)
         {
             _ = true;
         }

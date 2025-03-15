@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using System;
 
 namespace RhythmGameScene
 {
@@ -15,6 +16,7 @@ namespace RhythmGameScene
         //ReactivePropaerでPresenter側でViewを上手く処理する
         public ReactiveProperty<HitterType.hitterType> HitType { get; private set; } = new ReactiveProperty<HitterType.hitterType>();
         public HitterType.hitterType hitType { get;private set; }
+        private Action _ignoreNote;
         private string _keyTag;
         private const float GoodLength = 5f;
         private const float MissLength = 10f;
@@ -27,6 +29,10 @@ namespace RhythmGameScene
         private void SetKeyBord()
         {
             _keyTag = KeyBord.tag;
+        }
+        public void SetAction(Action action)
+        {
+            _ignoreNote = action;
         }
         public void SetUpModel()
         {
@@ -51,6 +57,9 @@ namespace RhythmGameScene
             if (collision.CompareTag(_keyTag))
             {
                 isOverlaping = false;
+                _ignoreNote?.Invoke();
+                //MisHitはOnExiteがactive falseのときも発火してしまうため要変更が必要
+                //MissHit();
             }
         }
         private void OnDisable()
@@ -58,7 +67,7 @@ namespace RhythmGameScene
             isOverlaping = false;
             hitNumber++;
             //発火しているかの確認
-            Debug.Log(hitNumber);
+            //Debug.Log(hitNumber);
         }
         public void MoveNote()
         {
@@ -72,10 +81,12 @@ namespace RhythmGameScene
             if (-1*GoodLength<length||length<GoodLength)
             {
                 GoodHit();
+                //Debug.Log("god");
             }
             else
             {
                 MissHit();
+                Debug.Log("miss");
             }
         }
         private void GoodHit()

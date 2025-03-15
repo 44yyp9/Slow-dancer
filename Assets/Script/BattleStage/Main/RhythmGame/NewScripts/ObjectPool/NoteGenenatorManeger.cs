@@ -20,6 +20,7 @@ namespace RhythmGameScene
             ManegerTime = 0;
             noteOrder = 0;
             Pool.SetUPPool();
+            Pool.CreatPool();
             ReadingNotes=new ReadingNote(bgmPath);
             var timingCount = ReadingNotes.GenerateNoteData().Count;
             timings = new float[timingCount];
@@ -40,11 +41,12 @@ namespace RhythmGameScene
         private void SpwnNote()
         {
             ManegerTime += GameTime.playingTime;
-            if (timings[noteOrder] > ManegerTime)
+            if (timings[noteOrder] < ManegerTime)
             {
                 //note‚ð“ñŒÂ¶¬‚·‚é
                 Pool.SpwnNote(LeftX);
                 Pool.SpwnNote(RigthX);
+                noteOrder++;
                 ManegerTime = 0;
             }
         }
