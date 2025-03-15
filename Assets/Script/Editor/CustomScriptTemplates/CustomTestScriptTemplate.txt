@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-namespace Test
+namespace RhythmGameScene
 {
     public class #SCRIPTNAME# : MonoBehaviour
     {

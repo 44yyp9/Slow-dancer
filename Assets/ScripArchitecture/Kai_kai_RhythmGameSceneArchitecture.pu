@@ -1,18 +1,54 @@
 @startuml RhythmGameSceneArchitecture
 namespace Main{
 namespace RhythmGame {
-    namespace Model{
         class ReadingNotes{
             -struct Note{+float time}
             -struct NoteData{List<Note> notes}
             +List<float> notesTime()
             }
+        interface IUpdateable{
+            +void update()
+        }
+        class NoteUpdater{
+            -ReadingNotes readingNotes
+            -NotesObjectPool notesObjectPool
+            -NotesHitter notesHitter
+            -NotesHitterView notesHitterView
+            +void updateNotes()
+        }
+        class NoteGeneratorManeger{
+            -ReadingNotes readingNotes
+            -NotesObjectPool notesObjectPool
+            +void generateNotes()
+        }
+        class NotesObjectPool{
+            -GameObject notePrefab
+            -NoteInputHandler noteInputHandler
+            -NoteHitterPresenter noteHitterPresenter
+            -int noteCount
+            -List<GameObject> notes
+            +void createPool()
+            +void setNotes()
+            //二組のノーツの削除
+            +void RealseNotes()
+            +voihd AllRealseNotes()
+        }
+        class NoteInputHandler{
+            -KeyCode keyCode
+            +bool input()
+        }
+        NotesObjectPool -down-> NoteInputHandler
         class NotesHitter{
             //もしかしたら
-            //pure C#でいけるかも
+            +void miss()
+            +void hit()
             +Combo combo
             +string judgment
             +void hit(Note note)
+        }
+        class NoteMovingModel{
+            -float noteLength
+            +void move()
         }
         class Combo{
             //pure C#でいける
@@ -22,57 +58,37 @@ namespace RhythmGame {
             +void resetCombo()
             +bool isCombo()
         }
-    }
-    namespace Presenter{
-        class NotesGeneratePresenter{
-            ReadingNotes readingNotes
-            NotesGenerateView notesGenerateView
+        class NoteView{
+            +show()
+            +hide()
+        }
+        class NoteHitterPresenter{
+            -NotesHitterModel _model
+            -NotesHitter _hitter
+            -NoteView _view
             +void subscribe()
         }
-        class NotesHitterPresenter{
-            NotesHitter notesHitter
-            NotesHitterView notesHitterView
-            +void subscribe()
-        }
-        class NoteMovingPresenter{
-            NoteMovingView noteMovingView
-            NotesHitter notesHitter
-            +void subscribe()
-        }
-    }
-    namespace View{
-        class NotesGenerateView{
-            +GameObject notePrefab
-            +void generateNotes()
-            -IEnumerator generateNotesCoroutine()
-        }
-        class NotesHitterView{
-            -GameObject nearNotes
-            +void findNearNotes()
-            +void miss()
-            +void hit()
+        class NotesHitterModel{
+            //MonoBehaviourを継承している
+            //そうすることで楽に実装する            
+            -NotesHitter notesHitter
+            -NoteMovingModel noteMovingModel
+            -float Notelength
+            -bool isSamePosition()
             +void destroyNote()
         }
-        interface JudgmentintHit{
-            +void hit()
-            +void miss()
-        }
-        class NoteMovingView{
-            +Transform notePosition
-            +void move()
-            +void onThrouth()
-            +void destroy()
-        }
-        NotesHitterView .right.> JudgmentintHit
-    }
+        NoteHitterPresenter -down-> NotesHitterModel
+        NoteHitterPresenter -up-> NoteView
+        NoteHitterPresenter -down-> NotesHitter
+        NotesHitterModel -left-> NoteMovingModel
+        NotesObjectPool -left->NoteHitterPresenter
+        NoteHitterPresenter .up.> IUpdateable
+        NoteGeneratorManeger .up.> IUpdateable
+        IUpdateable -up-> NoteUpdater
+        NoteGeneratorManeger -down-> NotesObjectPool
+        NoteGeneratorManeger -down-> ReadingNotes
 }
-NotesGeneratePresenter -down-> ReadingNotes
-NotesGeneratePresenter -up-> NotesGenerateView
-NotesHitterPresenter -down-> NotesHitter
-NotesHitterPresenter -up-> NotesHitterView
-NoteMovingPresenter -up-> NoteMovingView
-NoteMovingPresenter -down-> NotesHitter
-NotesHitter -left-> Combo
+NotesHitter -down-> Combo
 
 namespace ActionGame {
     namespace Animations{
