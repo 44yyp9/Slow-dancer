@@ -13,8 +13,8 @@ namespace RhythmGameScene
         private float[] timings;
         private int noteOrder;
         private float ManegerTime;
-        [SerializeField] private const float LeftX = -10f;
-        [SerializeField] private const float RigthX = 10f;
+        [SerializeField] private const float LeftX = -30f;
+        [SerializeField] private const float RigthX = 30f;
         private void OnEnable()
         {
             ManegerTime = 0;
