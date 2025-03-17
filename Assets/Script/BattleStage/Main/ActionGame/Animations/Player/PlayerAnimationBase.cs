@@ -36,7 +36,7 @@ public abstract class PlayerAnimationBase:StateMachineBehaviour
         animationTime = NotesGenerateView.delayTime;
         animationTime -= fadeTime;
         */
-        animationTime = 1.0f;//‰¼’u‚«
+        animationTime = 0.5f;//‰¼’u‚«
     }
     private float getAnimationTime()
     {

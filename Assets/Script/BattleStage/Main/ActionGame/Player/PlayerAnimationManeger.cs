@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using Cysharp.Threading.Tasks;
 
 public class PlayerAnimationManeger:AnimationManegerBase
 {
     public Animator playerAnimator;
     public ReactiveProperty<bool> comboing;
     public ReactiveProperty<int> playerHP;
-    public PlayerTag playerTag;
+    public ReactiveProperty<PlayerTag> playerTag;
     public bool isCombo()
     {
         return comboing.Value;
@@ -19,7 +20,7 @@ public class PlayerAnimationManeger:AnimationManegerBase
     }
     public void setTag(PlayerTag tag)
     {
-        this.playerTag = tag;
+        this.playerTag.Value = tag;
     }
     public void gameClear()
     {
@@ -33,6 +34,24 @@ public class PlayerAnimationManeger:AnimationManegerBase
     {
         //ゲーム開始時のタグの設定
         setTag(PlayerTag.Normal);
+        playerTag.Subscribe(_ =>HandleDamege()).AddTo(this);
+    }
+    //Enemyがアクセスするようのメソッド
+    public void ApplyDamege(int damagePoint)
+    {
+        setTag(PlayerTag.Damageing);
+        playerHP.Value -= damagePoint;
+    }
+    //player用のメソッド
+    private async void HandleDamege()
+    {
+        if (playerTag.Value == PlayerTag.Damageing)
+        {
+            //1秒間待機
+            await UniTask.Delay(1000);
+            //ここバグりそう
+            setTag(PlayerTag.Normal);
+        }
     }
 }
 public enum PlayerTag
@@ -46,4 +65,8 @@ public enum PlayerAnimatioName
     Idel,Jump, Forward_Ground_Attack, Back_Ground_Attack, Forward_Walk,Back_Walk,
     Forward_Run_Sky, Back_Run_Sky, Miss_Forward_Run_Sky, Miss_Back_Run_Sky
 
+}
+public enum EntityTag
+{
+    Player,Enemy,Ground,Goal
 }

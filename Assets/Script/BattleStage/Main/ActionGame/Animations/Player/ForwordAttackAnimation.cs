@@ -9,6 +9,7 @@ public class ForwordAttackAnimation :  PlayerAnimationBase
     {
         setManeger(animator);
         setAnimationSpeed(stateInfo.length);
+        animationManeger.setTag(PlayerTag.Attaking);
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -19,7 +20,7 @@ public class ForwordAttackAnimation :  PlayerAnimationBase
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        animationManeger.setTag(PlayerTag.Normal);
     }
     public override void nextAnimation()
     {
