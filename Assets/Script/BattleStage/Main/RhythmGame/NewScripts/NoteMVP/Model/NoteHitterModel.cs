@@ -13,12 +13,13 @@ namespace RhythmGameScene
         private NoteMovingModel _movingModel;
         [SerializeField] private GameObject KeyBord;
         [SerializeField] private Combo _combo;
+        private Collider2D KeyBordCollider;
         //ReactivePropaerでPresenter側でViewを上手く処理する
         public ReactiveProperty<HitterType.hitterType> HitType { get; private set; } = new ReactiveProperty<HitterType.hitterType>();
         public HitterType.hitterType hitType { get;private set; }
         private Action _ignoreNote;
         private string _keyTag;
-        private const float GoodLength = 5f;
+        private const float GoodLength = 1f;
         private const float MissLength = 10f;
         //被さっているかの確認
         public static bool isOverlaping;
@@ -46,6 +47,7 @@ namespace RhythmGameScene
         {
             if (collision.CompareTag(_keyTag))
             {
+                KeyBordCollider = collision;
                 isOverlaping = true;
             }
         }
@@ -59,7 +61,7 @@ namespace RhythmGameScene
                 isOverlaping = false;
                 _ignoreNote?.Invoke();
                 //MisHitはOnExiteがactive falseのときも発火してしまうため要変更が必要
-                //MissHit();
+                ThroughNote();
             }
         }
         private void OnDisable()
@@ -76,17 +78,27 @@ namespace RhythmGameScene
         public void JugeHitter()
         {
             var notePosiX = gameObject.transform.position.x;
-            var keyBordPosiX=KeyBord.transform.position.x;
+            var keyBordPosiX=KeyBordCollider.bounds.center.x;
             var length=notePosiX - keyBordPosiX;
             if (-1*GoodLength<length||length<GoodLength)
             {
                 GoodHit();
-                //Debug.Log("god");
             }
             else
             {
                 MissHit();
-                Debug.Log("miss");
+            }
+        }
+        private void ThroughNote()
+        {
+            var notePosiX = transform.position.x;
+            var keyBordBounds = KeyBordCollider.bounds;
+
+            bool isInside = keyBordBounds.min.x <= notePosiX && notePosiX <= keyBordBounds.max.x;
+
+            if (!isInside)
+            {
+                MissHit();
             }
         }
         private void GoodHit()
