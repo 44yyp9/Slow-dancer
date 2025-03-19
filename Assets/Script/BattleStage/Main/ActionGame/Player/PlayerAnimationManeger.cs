@@ -10,6 +10,7 @@ public class PlayerAnimationManeger:AnimationManegerBase
     public ReactiveProperty<bool> comboing;
     public ReactiveProperty<int> playerHP;
     public ReactiveProperty<PlayerTag> playerTag;
+    private Rigidbody2D PlayerRigidbody;
     public bool isCombo()
     {
         return comboing.Value;
@@ -35,6 +36,7 @@ public class PlayerAnimationManeger:AnimationManegerBase
         //ゲーム開始時のタグの設定
         setTag(PlayerTag.Normal);
         playerTag.Subscribe(_ =>HandleDamege()).AddTo(this);
+        PlayerRigidbody = GetComponent<Rigidbody2D>();
     }
     //Enemyがアクセスするようのメソッド
     public void ApplyDamege(int damagePoint)
@@ -52,6 +54,14 @@ public class PlayerAnimationManeger:AnimationManegerBase
             //ここバグりそう
             setTag(PlayerTag.Normal);
         }
+    }
+    public void ForceGravity()
+    {
+        PlayerRigidbody.gravityScale = 1.0f;
+    }
+    public void FloatgGravity()
+    {
+        PlayerRigidbody.gravityScale = 0f;
     }
 }
 public enum PlayerTag

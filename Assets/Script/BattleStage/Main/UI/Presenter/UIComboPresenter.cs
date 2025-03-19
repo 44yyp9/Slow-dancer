@@ -12,6 +12,7 @@ public class UIComboPresenter : MonoBehaviour
     {
         isComboSubscribe();
         comboPointSubscribe();
+        enegySbuscribe();
     }
     private void comboPointSubscribe()
     {
@@ -30,5 +31,10 @@ public class UIComboPresenter : MonoBehaviour
             {
                 comboModel.isCombo.Subscribe(_ => comboView.isCombo = comboModel.isCombo).AddTo(this);
             }));
+    }
+    private void enegySbuscribe()
+    {
+        comboModel.combo.Subscribe(_ =>comboModel.ManegeEnegy()).AddTo(this);
+        comboModel.comboEnegy.Subscribe(_ =>comboView.ShowEnegy(comboModel.comboEnegy.Value)).AddTo(this);
     }
 }

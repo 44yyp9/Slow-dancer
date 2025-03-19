@@ -18,6 +18,7 @@ public class UIScorePresenter : MonoBehaviour
             subscribe: () =>
             {
                 model.score.Subscribe(_ => view.viewPoint = model.score).AddTo(this);
+                model.score.Subscribe(_ =>view.setScoreValue(model.IsSliderValue())).AddTo(this);
             }
             ));
     }

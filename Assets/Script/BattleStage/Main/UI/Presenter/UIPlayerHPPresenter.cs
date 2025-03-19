@@ -18,6 +18,8 @@ public class UIPlayerHPPresenter : MonoBehaviour
             condition: () => playerHPView.viewPoint != null && playerHPModel.playerHP != null,
             subscribe: () =>
             {
+                playerHPModel.playerHP.Subscribe(_ => playerHPModel.ChangeFill()).AddTo(this);
+                playerHPModel.playerHP.Subscribe(_ =>playerHPView.ChangeFillLength(playerHPModel.TranslateHP())).AddTo(this);
                 playerHPModel.playerHP.Subscribe(_ => playerHPView.viewPoint = playerHPModel.playerHP).AddTo(this);
             }
             ));
