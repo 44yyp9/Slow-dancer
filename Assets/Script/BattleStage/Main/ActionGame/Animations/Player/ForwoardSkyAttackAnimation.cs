@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class MissSkyForwardRunAnimation:PlayerAnimationBase
+public class ForwoardSkyAttackAnimation:PlayerAnimationBase
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -47,8 +47,8 @@ public class MissSkyForwardRunAnimation:PlayerAnimationBase
     }
     public override void movePosition()
     {
-        var sineMovingX = calculationSine(PlayerAnimationManeger.MissMagnification);
-        animationManeger.gameObject.transform.position += new Vector3(sineMovingX, 0, 0) * GameTime.playingTime * 5f;
-        animationManeger.gameObject.transform.position += new Vector3(1.0f, 0, 0) * GameTime.playingTime * 1f;
+        var sineMovingX = calculationSine(PlayerAnimationManeger.RunMagnification);
+        animationManeger.gameObject.transform.position += new Vector3(sineMovingX, 0, 0) * GameTime.playingTime * 10f;
+        animationManeger.gameObject.transform.position += new Vector3(1.0f, 0, 0) * GameTime.playingTime * 2f;
     }
 }

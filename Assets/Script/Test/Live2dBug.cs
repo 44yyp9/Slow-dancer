@@ -24,6 +24,7 @@ namespace Test
                 player.SetActive(true);
                 test = false;
             }
+            
         }
     }
 }

@@ -16,6 +16,9 @@ public class InputPlayerManeger
             new InputForwardRunHandler(),
             new InputIdelHandler(),
             new InputForwardAttackHandler(),
+            new InputUpForwardJumpHandler(),
+            new InputDownForwardJumpHandler(),
+            new InputJumpHandler()
         };
         inputResults = new Dictionary<Type, bool>();
         Debug.Log("InputPlayerManeger Instance Created");

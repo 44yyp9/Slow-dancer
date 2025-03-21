@@ -42,36 +42,40 @@ public abstract class InputHandlerBase
     public bool inputRightPad()
     {
         var _ = false;
-        if (Input.GetAxis(DPadX) > 0)
+        if (Input.GetAxis(DPadY) > 0) //Input.GetKey(KeyCode.JoystickButton5)
         {
             _ =true;
+            //Debug.Log("‰E‚ð“ü—Í");
         }
         return _;
     }
     public bool inputLeftPad()
     {
         var _ = false;
-        if (Input.GetAxis(DPadX)<0)
+        if (Input.GetAxis(DPadY)<0)
         {
             _ = true;
+            //Debug.Log("¶‚ð“ü—Í");
         }
         return _;
     }
     public bool inputUpPad()
     {
         var _ = false;
-        if (Input.GetAxis(DPadY) > 0)
+        if (Input.GetAxis(DPadX) < 0)
         {
             _ = true;
+            //Debug.Log("ã‚ð“ü—Í");
         }
         return _;
     }
     public bool inputDownPad()
     {
         var _ = false;
-        if (Input.GetAxis(DPadY) < 0)
+        if (Input.GetAxis(DPadX) > 0)
         {
             _ = true;
+            //Debug.Log("‰º‚ð“ü—Í");
         }
         return _;
     }

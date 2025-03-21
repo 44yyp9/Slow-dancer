@@ -23,27 +23,62 @@ public class MissRunForwardAnimation : PlayerAnimationBase
     public override void nextAnimation()
     {
         var isCombo = animationManeger.isCombo();
-        //Handlerの実装は問題ないが、タグは今後変更するので注意が必要
-        if (inputManeger.getInput<InputForwardAttackHandler>())
+        //インスタンスの生成
+        var inputForwardWalkHandler = new InputForwardWalkHandler();
+        //入力の実装
+        //歩き
+        if (inputForwardWalkHandler.GetKey())
+        {
+            transNextAnimation(PlayerAnimatioName.Forward_Walk);
+        }
+        //攻撃
+        if (isCombo && inputManeger.getInput<InputForwardAttackHandler>())
         {
             transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack);
         }
+        else if (!isCombo && inputManeger.getInput<InputForwardAttackHandler>()) //ミス移動
+        {
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Dash);
+        }
+        //ダッシュ
         if (isCombo && inputManeger.getInput<InputForwardRunHandler>())
         {
-            //実際はjamp中しかできないので注意
-            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky);
+            transNextAnimation(PlayerAnimatioName.Forward_Dash);
         }
-        else if (!isCombo && inputManeger.getInput<InputForwardRunHandler>())
+        else if (isCombo && inputManeger.getInput<InputUpForwardJumpHandler>()) //UpJump
         {
-            //実際はjamp中しかできないので注意
-            transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky);
+            transNextAnimation(PlayerAnimatioName.Forward_Up_Jump);
         }
-        //落ちるアニメーションを追加したほうがいいかも
-
+        else if (isCombo && inputManeger.getInput<InputDownForwardJumpHandler>()) //DownJump
+        {
+            transNextAnimation(PlayerAnimatioName.Forward_Down_Jump);
+        }
+        else if (!isCombo && inputManeger.getInput<InputForwardRunHandler>()) //ミス移動
+        {
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Dash);
+        }
+        //その場にとどまる
+        if (isCombo && inputManeger.getInput<InputIdelHandler>())
+        {
+            transNextAnimation(PlayerAnimatioName.Idel);
+        }
+        else if (!isCombo && inputManeger.getInput<InputIdelHandler>()) //ミス移動
+        {
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Dash);
+        }
+        //jump
+        if (isCombo && inputManeger.getInput<InputJumpHandler>())
+        {
+            transNextAnimation(PlayerAnimatioName.Jump);
+        }
+        else if (!isCombo && inputManeger.getInput<InputJumpHandler>()) //ミス移動
+        {
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Dash);
+        }
     }
     public override void movePosition()
     {
-        var sineMovingX = calculationSine(3f);
+        var sineMovingX = calculationSine(PlayerAnimationManeger.MissMagnification);
         animationManeger.gameObject.transform.position += new Vector3(sineMovingX, 0, 0) * GameTime.playingTime * 5f;
         animationManeger.gameObject.transform.position += new Vector3(1.0f, 0, 0) * GameTime.playingTime * 1f;
     }

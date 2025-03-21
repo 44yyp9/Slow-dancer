@@ -21,6 +21,7 @@ public class UpForwardJumpAnimation : PlayerAnimationBase
     }
     public override void nextAnimation()
     {
+        var isCombo = animationManeger.isCombo();
 
     }
     public override void movePosition()

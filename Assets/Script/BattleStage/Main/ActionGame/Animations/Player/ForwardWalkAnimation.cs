@@ -23,22 +23,49 @@ public class ForwardWalkAnimation: PlayerAnimationBase
     public override void nextAnimation()
     {
         var isCombo=animationManeger.isCombo();
-        var inputAttack=new InputForwardAttackHandler();
-        if (inputAttack.GetKey())
+        //攻撃
+        if (isCombo && inputManeger.getInput<InputForwardAttackHandler>())
         {
             transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack);
         }
-        var inputForwardRunHandler = new InputForwardRunHandler();
-        if (isCombo&&inputForwardRunHandler.GetKey())
+        else if (!isCombo && inputManeger.getInput<InputForwardAttackHandler>()) //ミス移動
         {
-            //実際はjamp中しかできないので注意
-            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky);
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Dash);
         }
-        else if (!isCombo&&inputForwardRunHandler.GetKey())
+        //ダッシュ
+        if (isCombo && inputManeger.getInput<InputForwardRunHandler>())
         {
-            //実際はjamp中しかできないので注意
-            Debug.Log(PlayerAnimatioName.Miss_Forward_Run_Sky.ToString());
-            transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky);
+            transNextAnimation(PlayerAnimatioName.Forward_Dash);
+        }
+        else if (isCombo && inputManeger.getInput<InputUpForwardJumpHandler>()) //UpJump
+        {
+            transNextAnimation(PlayerAnimatioName.Forward_Up_Jump);
+        }
+        else if (isCombo && inputManeger.getInput<InputDownForwardJumpHandler>()) //DownJump
+        {
+            transNextAnimation(PlayerAnimatioName.Forward_Down_Jump);
+        }
+        else if (!isCombo && inputManeger.getInput<InputForwardRunHandler>()) //ミス移動
+        {
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Dash);
+        }
+        //その場にとどまる
+        if (isCombo && inputManeger.getInput<InputIdelHandler>())
+        {
+            transNextAnimation(PlayerAnimatioName.Idel);
+        }
+        else if (!isCombo && inputManeger.getInput<InputIdelHandler>()) //ミス移動
+        {
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Dash);
+        }
+        //jump
+        if (isCombo && inputManeger.getInput<InputJumpHandler>())
+        {
+            transNextAnimation(PlayerAnimatioName.Jump);
+        }
+        else if (!isCombo && inputManeger.getInput<InputJumpHandler>()) //ミス移動
+        {
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Dash);
         }
         var inputIdelHandler =new InputForwardWalkHandler();
         if (inputIdelHandler.upButton())
@@ -48,7 +75,7 @@ public class ForwardWalkAnimation: PlayerAnimationBase
     }
     public override void movePosition()
     {
-        animationManeger.gameObject.transform.position += new Vector3(1, 0, 0) * GameTime.playingTime;
+        animationManeger.gameObject.transform.position += new Vector3(PlayerAnimationManeger.WalkMagnification, 0, 0) * GameTime.playingTime;
     }
 
 }
