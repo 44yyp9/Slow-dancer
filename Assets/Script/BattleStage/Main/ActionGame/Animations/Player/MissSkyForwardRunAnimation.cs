@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class JumpForwardAttackAnimation : PlayerAnimationBase
+public class MissSkyForwardRunAnimation:PlayerAnimationBase
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -21,16 +21,10 @@ public class JumpForwardAttackAnimation : PlayerAnimationBase
     }
     public override void nextAnimation()
     {
-        //‰¼Ž~‚ß‚ÅŽÀ‘•
-        var inputAttack = new InputForwardAttackHandler();
-        if (inputAttack.GetKey())
-        {
-            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack);
-        }
+
     }
     public override void movePosition()
     {
 
     }
-
 }

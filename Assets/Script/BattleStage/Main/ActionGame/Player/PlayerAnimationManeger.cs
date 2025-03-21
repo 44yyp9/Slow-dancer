@@ -72,9 +72,9 @@ public enum PlayerTag
 }
 public enum PlayerAnimatioName
 {
-    Idel,Jump, Forward_Ground_Attack, Back_Ground_Attack, Forward_Walk,Back_Walk,
-    Forward_Run_Sky, Back_Run_Sky, Miss_Forward_Run_Sky, Miss_Back_Run_Sky
-
+    Idel,Jump, Forward_Ground_Attack, Forward_Walk,Forward_Dash,Miss_Forward_Dash,
+    Forward_Run_Sky, Miss_Forward_Run_Sky, Forward_Sky_Attack,
+    Forward_Up_Jump,Forward_Down_Jump
 }
 public enum EntityTag
 {

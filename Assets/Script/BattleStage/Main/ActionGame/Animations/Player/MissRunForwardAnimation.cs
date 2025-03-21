@@ -26,17 +26,17 @@ public class MissRunForwardAnimation : PlayerAnimationBase
         //Handlerの実装は問題ないが、タグは今後変更するので注意が必要
         if (inputManeger.getInput<InputForwardAttackHandler>())
         {
-            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
+            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack);
         }
         if (isCombo && inputManeger.getInput<InputForwardRunHandler>())
         {
             //実際はjamp中しかできないので注意
-            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky.ToString());
+            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky);
         }
         else if (!isCombo && inputManeger.getInput<InputForwardRunHandler>())
         {
             //実際はjamp中しかできないので注意
-            transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky.ToString());
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky);
         }
         //落ちるアニメーションを追加したほうがいいかも
 

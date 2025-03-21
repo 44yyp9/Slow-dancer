@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using RhythmGameScene;
 
 public abstract class PlayerAnimationBase:StateMachineBehaviour
 {
@@ -24,19 +25,18 @@ public abstract class PlayerAnimationBase:StateMachineBehaviour
             animationManeger.playerAnimator.Play("");
         }
     }
-    public void transNextAnimation(string name)
+    public void transNextAnimation(PlayerAnimatioName name)
     {
         resetAnimationSpeed();
-        animationManeger.playerAnimator.Play(name, 0, 0f);
+        var _name=name.ToString();
+        animationManeger.playerAnimator.Play(_name, 0, 0f);
     }
-    private float animationTime = NotesGenerateView.delayTime;
+    private float animationTime = NoteGenenatorManeger.NoteSpan;
     private void setAnimationTime()
     {
-        /*
-        animationTime = NotesGenerateView.delayTime;
+        animationTime = NoteGenenatorManeger.NoteSpan;
         animationTime -= fadeTime;
-        */
-        animationTime = 0.5f;//仮置き
+        //animationTime = 0.5f;//仮置き
     }
     private float getAnimationTime()
     {
@@ -67,7 +67,7 @@ public abstract class PlayerAnimationBase:StateMachineBehaviour
         float sine = Mathf.Sin(progressesTime * frequency);
         if (sine <= 0)
         {
-            transNextAnimation(PlayerAnimatioName.Idel.ToString());
+            transNextAnimation(PlayerAnimatioName.Idel);
             return;
         }
         //計算は正しいはずなのに上手く行かない

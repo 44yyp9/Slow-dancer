@@ -26,24 +26,24 @@ public class ForwardWalkAnimation: PlayerAnimationBase
         var inputAttack=new InputForwardAttackHandler();
         if (inputAttack.GetKey())
         {
-            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
+            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack);
         }
         var inputForwardRunHandler = new InputForwardRunHandler();
         if (isCombo&&inputForwardRunHandler.GetKey())
         {
             //é¿ç€ÇÕjampíÜÇµÇ©Ç≈Ç´Ç»Ç¢ÇÃÇ≈íçà”
-            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky.ToString());
+            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky);
         }
         else if (!isCombo&&inputForwardRunHandler.GetKey())
         {
             //é¿ç€ÇÕjampíÜÇµÇ©Ç≈Ç´Ç»Ç¢ÇÃÇ≈íçà”
             Debug.Log(PlayerAnimatioName.Miss_Forward_Run_Sky.ToString());
-            transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky.ToString());
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky);
         }
         var inputIdelHandler =new InputForwardWalkHandler();
         if (inputIdelHandler.upButton())
         {
-            transNextAnimation(PlayerAnimatioName.Idel.ToString());
+            transNextAnimation(PlayerAnimatioName.Idel);
         }
     }
     public override void movePosition()

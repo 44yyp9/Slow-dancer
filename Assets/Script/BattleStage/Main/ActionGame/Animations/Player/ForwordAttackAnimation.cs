@@ -27,23 +27,23 @@ public class ForwordAttackAnimation :  PlayerAnimationBase
         var inputWalk = new InputForwardWalkHandler();
         if (inputWalk.GetKey())
         {
-            transNextAnimation(PlayerAnimatioName.Forward_Walk.ToString());
+            transNextAnimation(PlayerAnimatioName.Forward_Walk);
         }
         var inputForwardAttackHandler = new InputForwardAttackHandler();
         if (inputForwardAttackHandler.GetKey())
         {
-            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
+            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack);
         }
         var inputForwardRunHandler = new InputForwardRunHandler();
         if (inputForwardRunHandler.GetKey())
         {
             //é¿ç€ÇÕjampíÜÇµÇ©Ç≈Ç´Ç»Ç¢ÇÃÇ≈íçà”
-            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky.ToString());
+            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky);
         }
         var inputIdelHandler = new InputIdelHandler();
         if (inputIdelHandler.GetKey())
         {
-            transNextAnimation(PlayerAnimatioName.Idel.ToString());
+            transNextAnimation(PlayerAnimatioName.Idel);
         }
     }
     public override void movePosition()

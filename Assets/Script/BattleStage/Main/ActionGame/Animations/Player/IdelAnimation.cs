@@ -27,25 +27,25 @@ public class IdelAnimation : PlayerAnimationBase
         //ì¸óÕÇÃé¿ëï
         if (inputForwardWalkHandler.GetKey())
         {
-            transNextAnimation(PlayerAnimatioName.Forward_Walk.ToString());
+            transNextAnimation(PlayerAnimatioName.Forward_Walk);
         }
         if (inputManeger.getInput<InputForwardAttackHandler>())
         {
-            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack.ToString());
+            transNextAnimation(PlayerAnimatioName.Forward_Ground_Attack);
         }
         if (isCombo && inputManeger.getInput<InputForwardRunHandler>())
         {
             //é¿ç€ÇÕjampíÜÇµÇ©Ç≈Ç´Ç»Ç¢ÇÃÇ≈íçà”
-            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky.ToString());
+            transNextAnimation(PlayerAnimatioName.Forward_Run_Sky);
         }
         else if (!isCombo && inputManeger.getInput<InputForwardRunHandler>())
         {
             //é¿ç€ÇÕjampíÜÇµÇ©Ç≈Ç´Ç»Ç¢ÇÃÇ≈íçà”
-            transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky.ToString());
+            transNextAnimation(PlayerAnimatioName.Miss_Forward_Run_Sky);
         }
         if (inputManeger.getInput<InputIdelHandler>())
         {
-            transNextAnimation(PlayerAnimatioName.Idel.ToString());
+            transNextAnimation(PlayerAnimatioName.Idel);
         }
     }
     public override void movePosition()
