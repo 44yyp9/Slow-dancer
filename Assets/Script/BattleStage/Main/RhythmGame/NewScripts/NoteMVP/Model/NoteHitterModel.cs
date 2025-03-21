@@ -77,16 +77,23 @@ namespace RhythmGameScene
         }
         public void JugeHitter()
         {
-            var notePosiX = gameObject.transform.position.x;
-            var keyBordPosiX=KeyBordCollider.bounds.center.x;
-            var length=notePosiX - keyBordPosiX;
-            if (-1*GoodLength<length||length<GoodLength)
+            try
             {
-                GoodHit();
+                var notePosiX = gameObject.transform.position.x;
+                var keyBordPosiX = KeyBordCollider.bounds.center.x;
+                var length = notePosiX - keyBordPosiX;
+                if (-1 * GoodLength < length || length < GoodLength)
+                {
+                    GoodHit();
+                }
+                else
+                {
+                    MissHit();
+                }
             }
-            else
+            catch
             {
-                MissHit();
+                //‹C‹x‚ß’ö“x‚ÌŽÀ‘•‚Ì‚½‚ßŒã‚ÉC³‚·‚é
             }
         }
         private void ThroughNote()

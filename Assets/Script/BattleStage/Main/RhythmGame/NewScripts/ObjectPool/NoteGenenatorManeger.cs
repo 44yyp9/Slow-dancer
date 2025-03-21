@@ -47,6 +47,7 @@ namespace RhythmGameScene
                 Pool.SpwnNote(LeftX);
                 Pool.SpwnNote(RigthX);
                 noteOrder++;
+                Debug.Log(noteOrder);
                 ManegerTime = 0;
             }
         }
