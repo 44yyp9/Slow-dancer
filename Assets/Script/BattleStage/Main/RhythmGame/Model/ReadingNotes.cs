@@ -55,6 +55,7 @@ namespace RhythmGameScene
         public List<float> GenerateNoteData()
         {
             List<float> notes = new List<float>();
+            bgmPath = Path.Combine(Application.streamingAssetsPath, bgmPath);
             string json = File.ReadAllText(bgmPath);
             NotesData notesData = JsonUtility.FromJson<NotesData>(json);
             for (int i = 0; i < notesData.Notes.Count; i++)

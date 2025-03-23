@@ -7,7 +7,7 @@ using System;
 public class Enemy1AnimationManeger : MonoBehaviour
 {
     public const int EnemyScore = 10;
-    public const int EnemyDamegePoint = 5;
+    public const int EnemyDamegePoint = 20;
     [SerializeField] private Animator animator;
     private Action<Collider2D> touchingPlayer;
     private void OnTriggerEnter2D(Collider2D collision)

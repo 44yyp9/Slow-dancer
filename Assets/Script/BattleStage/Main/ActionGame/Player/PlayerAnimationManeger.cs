@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class PlayerAnimationManeger:AnimationManegerBase
 {
+    public static bool IsGameClear;
     public Animator playerAnimator;
     public ReactiveProperty<bool> comboing;
     public ReactiveProperty<int> playerHP;
@@ -32,17 +35,30 @@ public class PlayerAnimationManeger:AnimationManegerBase
     }
     public void gameClear()
     {
-
+        //早期リターンでネストを小さくする
+        if (entityTag.Value == EntityTag.Goal.ToString())
+        {
+            IsGameClear = true;
+            SceneManager.LoadScene("GameResultScene");
+        }
     }
     public void gameOver()
     {
-
+        if (playerHP.Value <= 0)
+        {
+            IsGameClear = false;
+            SceneManager.LoadScene("GameResultScene");
+        }
     }
     private void Start()
     {
+        playerHP.Value = 100;
+        IsGameClear = false;
         //ゲーム開始時のタグの設定
         setTag(PlayerTag.Normal);
         playerTag.Subscribe(_ =>HandleDamege()).AddTo(this);
+        entityTag.Subscribe(_ =>gameClear()).AddTo(this);
+        playerHP.Subscribe(_ =>gameOver()).AddTo(this);
         PlayerRigidbody = GetComponent<Rigidbody2D>();
         SetJumpTag(EntityTag.Air);
         entityTag.Subscribe(_ =>HadleGravity()).AddTo(this);
@@ -94,7 +110,15 @@ public class PlayerAnimationManeger:AnimationManegerBase
     private void SetCollderTag(Collision2D collider)
     {
         var col = collider.gameObject;
+        Debug.Log(col.tag.ToString());
         entityTag.Value = col.tag;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == EntityTag.Ground.ToString())
+        {
+            entityTag.Value = EntityTag.Air.ToString();
+        }
     }
     public void SetJumpTag(EntityTag tag)
     {

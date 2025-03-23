@@ -22,6 +22,7 @@ namespace RhythmGameScene
         {
             ManegerTime = 0;
             noteOrder = 0;
+            GoalObject.SetActive(false);
             Pool.SetUPPool();
             Pool.CreatPool();
             ReadingNotes=new ReadingNote(bgmPath);
@@ -53,7 +54,25 @@ namespace RhythmGameScene
                 noteOrder++;
                 //ここは本来一番目の前のノーツの秒数をgetする
                 SetNoteSpan(timings[noteOrder]);
+                SpwanGoal();
                 ManegerTime = 0;
+            }
+        }
+        [SerializeField] private GameObject GoalObject;
+        [SerializeField] private GameObject Player;
+        //本番の実装のときには変更する
+        private void SpwanGoal()
+        {
+            if(noteOrder> ReadingNotes.GenerateNoteData().Count-2)
+            {
+                Debug.Log("Spwned");
+                var posi = Player.transform.position;
+                posi += new Vector3(40f, 20f, 0);
+                GoalObject.transform.position = posi;
+                GoalObject.AddComponent<Rigidbody2D>();
+                GoalObject.AddComponent<BoxCollider2D>();
+                GoalObject.tag = EntityTag.Goal.ToString();
+                GoalObject.SetActive(true);
             }
         }
         private void SetNoteSpan(float span)

@@ -78,7 +78,7 @@ public class MissRunForwardAnimation : PlayerAnimationBase
     }
     public override void movePosition()
     {
-        var sineMovingX = calculationSine(PlayerAnimationManeger.MissMagnification);
+        var sineMovingX = calculationSine(PlayerAnimationManeger.MissMagnification/5);
         animationManeger.gameObject.transform.position += new Vector3(sineMovingX, 0, 0) * GameTime.playingTime * 5f;
         animationManeger.gameObject.transform.position += new Vector3(1.0f, 0, 0) * GameTime.playingTime * 1f;
     }
