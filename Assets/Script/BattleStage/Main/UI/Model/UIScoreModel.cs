@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using UnityEngine.UI;
 
 public class UIScoreModel : MonoBehaviour
 {
@@ -9,12 +10,14 @@ public class UIScoreModel : MonoBehaviour
     [SerializeField] private UICoinModel coinModel;
     public ReactiveProperty<int> score = new ReactiveProperty<int>(0);
     public static int _score = 0;
+    private UIScoreSliderModel sliderModel;
     private void Start()
     {
         //èâä˙ílÇÃê›íË
         _score = 0;
         subscribeCombo();
         subscribeCoin();
+        sliderModel = new UIScoreSliderModel(SliderBaseSprite, SliderSpreite, Sliders, ScoreRank);
     }
     private void subscribeCombo()
     {
@@ -73,5 +76,15 @@ public class UIScoreModel : MonoBehaviour
         if(increment<=0) increment = 0;
         increment *= 5;
         return increment;
+    }
+    [Header("SliderÇ…Ç¬Ç¢ÇƒÇÃInspector")]
+    [SerializeField] private Image SliderBaseSprite;
+    [SerializeField] private Image SliderSpreite;
+    [SerializeField] private List<Sprite> Sliders;
+    [SerializeField] private List<int> ScoreRank;
+    public float IsSliderValue()
+    {
+        var _value = sliderModel.IsSliderValue(score.Value);
+        return _value;
     }
 }

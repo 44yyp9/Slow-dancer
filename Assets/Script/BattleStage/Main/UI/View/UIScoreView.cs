@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UniRx;
+using UnityEngine.UI;
 
 public class UIScoreView : UIView
 {
+    [SerializeField] private Slider ScoreSlider;
     public override void upPointAnimation()
     {
         
@@ -12,5 +11,10 @@ public class UIScoreView : UIView
     public override void downPointAnimation()
     {
         
+    }
+    public void setScoreValue(float _value)
+    {
+        //ここにDotweenでアニメーション
+        ScoreSlider.value = _value;
     }
 }

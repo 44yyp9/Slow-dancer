@@ -326,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6372447989624891807, guid: ea7680a8fa6d9da4fa05905a8eeee626, type: 3}
       propertyPath: m_Name
-      value: Stage1
+      value: TestStageScene3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

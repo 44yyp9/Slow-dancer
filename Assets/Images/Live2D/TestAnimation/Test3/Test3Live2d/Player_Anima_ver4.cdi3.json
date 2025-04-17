@@ -1,0 +1,497 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "Param",
+			"GroupId": "",
+			"Name": "体X"
+		},
+		{
+			"Id": "Param20",
+			"GroupId": "",
+			"Name": "体ｚ"
+		},
+		{
+			"Id": "Param15",
+			"GroupId": "",
+			"Name": "座標X"
+		},
+		{
+			"Id": "Param16",
+			"GroupId": "",
+			"Name": "座標Y"
+		},
+		{
+			"Id": "Param17",
+			"GroupId": "",
+			"Name": "座標Z"
+		},
+		{
+			"Id": "Param21",
+			"GroupId": "ParamGroup6",
+			"Name": "X"
+		},
+		{
+			"Id": "Param22",
+			"GroupId": "ParamGroup6",
+			"Name": "Y"
+		},
+		{
+			"Id": "Param23",
+			"GroupId": "ParamGroup6",
+			"Name": "パラメータ24"
+		},
+		{
+			"Id": "Param25",
+			"GroupId": "ParamGroup6",
+			"Name": "パラメータ26"
+		},
+		{
+			"Id": "Param24",
+			"GroupId": "ParamGroup6",
+			"Name": "パラメータ25"
+		},
+		{
+			"Id": "Param27",
+			"GroupId": "ParamGroup7",
+			"Name": "X"
+		},
+		{
+			"Id": "Param28",
+			"GroupId": "ParamGroup7",
+			"Name": "Y"
+		},
+		{
+			"Id": "Param29",
+			"GroupId": "ParamGroup7",
+			"Name": "z"
+		},
+		{
+			"Id": "Param2",
+			"GroupId": "ParamGroup",
+			"Name": "角度Z"
+		},
+		{
+			"Id": "ParamAngleX",
+			"GroupId": "ParamGroup",
+			"Name": "角度 X"
+		},
+		{
+			"Id": "ParamAngleY",
+			"GroupId": "ParamGroup",
+			"Name": "角度 Y"
+		},
+		{
+			"Id": "Param26",
+			"GroupId": "ParamGroup",
+			"Name": "髪"
+		},
+		{
+			"Id": "Param3",
+			"GroupId": "ParamGroup2",
+			"Name": "上"
+		},
+		{
+			"Id": "Param4",
+			"GroupId": "ParamGroup2",
+			"Name": "下"
+		},
+		{
+			"Id": "Param5",
+			"GroupId": "ParamGroup2",
+			"Name": "手"
+		},
+		{
+			"Id": "Param6",
+			"GroupId": "ParamGroup3",
+			"Name": "上"
+		},
+		{
+			"Id": "Param7",
+			"GroupId": "ParamGroup3",
+			"Name": "下"
+		},
+		{
+			"Id": "Param8",
+			"GroupId": "ParamGroup3",
+			"Name": "手"
+		},
+		{
+			"Id": "Param9",
+			"GroupId": "ParamGroup4",
+			"Name": "上"
+		},
+		{
+			"Id": "Param10",
+			"GroupId": "ParamGroup4",
+			"Name": "下"
+		},
+		{
+			"Id": "Param11",
+			"GroupId": "ParamGroup4",
+			"Name": "靴"
+		},
+		{
+			"Id": "Param18",
+			"GroupId": "ParamGroup4",
+			"Name": "縮み"
+		},
+		{
+			"Id": "Param12",
+			"GroupId": "ParamGroup5",
+			"Name": "上"
+		},
+		{
+			"Id": "Param13",
+			"GroupId": "ParamGroup5",
+			"Name": "下"
+		},
+		{
+			"Id": "Param14",
+			"GroupId": "ParamGroup5",
+			"Name": "靴"
+		},
+		{
+			"Id": "Param19",
+			"GroupId": "ParamGroup5",
+			"Name": "縮み"
+		}
+	],
+	"ParameterGroups": [
+		{
+			"Id": "ParamGroup6",
+			"GroupId": "",
+			"Name": "berimbau"
+		},
+		{
+			"Id": "ParamGroup7",
+			"GroupId": "",
+			"Name": "エフェクト"
+		},
+		{
+			"Id": "ParamGroup",
+			"GroupId": "",
+			"Name": "頭"
+		},
+		{
+			"Id": "ParamGroup2",
+			"GroupId": "",
+			"Name": "armR"
+		},
+		{
+			"Id": "ParamGroup3",
+			"GroupId": "",
+			"Name": "armL"
+		},
+		{
+			"Id": "ParamGroup4",
+			"GroupId": "",
+			"Name": "legL"
+		},
+		{
+			"Id": "ParamGroup5",
+			"GroupId": "",
+			"Name": "LegR"
+		}
+	],
+	"Parts": [
+		{
+			"Id": "Part98",
+			"Name": "アイドル差分用ver6.1.psd（対応無し）"
+		},
+		{
+			"Id": "Part59",
+			"Name": "アイドル差分用ver5.1.psd（対応無し）"
+		},
+		{
+			"Id": "Part33",
+			"Name": "アイドル差分用ver4.1.psd（対応無し）"
+		},
+		{
+			"Id": "Part39",
+			"Name": "フォルダー 31 のコピー 2"
+		},
+		{
+			"Id": "Part53",
+			"Name": "フォルダー 2 のコピー"
+		},
+		{
+			"Id": "Part65",
+			"Name": "フォルダー 6 のコピー"
+		},
+		{
+			"Id": "Part87",
+			"Name": "通常"
+		},
+		{
+			"Id": "Part21",
+			"Name": "フォルダー 6 のコピー"
+		},
+		{
+			"Id": "Part38",
+			"Name": "強攻 のコピー"
+		},
+		{
+			"Id": "Part48",
+			"Name": "通常"
+		},
+		{
+			"Id": "Part11",
+			"Name": "強攻 のコピー"
+		},
+		{
+			"Id": "Part22",
+			"Name": "通常"
+		},
+		{
+			"Id": "Part40",
+			"Name": "左腕 のコピー"
+		},
+		{
+			"Id": "Part41",
+			"Name": "フォルダー 4 のコピー 2"
+		},
+		{
+			"Id": "Part47",
+			"Name": "右腕 のコピー 3"
+		},
+		{
+			"Id": "Part49",
+			"Name": "体 のコピー 2"
+		},
+		{
+			"Id": "Part50",
+			"Name": "脚  のコピー"
+		},
+		{
+			"Id": "Part54",
+			"Name": "フォルダー 1 のコピー"
+		},
+		{
+			"Id": "Part60",
+			"Name": "左腕"
+		},
+		{
+			"Id": "Part61",
+			"Name": "体 のコピー"
+		},
+		{
+			"Id": "Part62",
+			"Name": "右腕 のコピー 2"
+		},
+		{
+			"Id": "Part63",
+			"Name": "フォルダー 5 のコピー"
+		},
+		{
+			"Id": "Part64",
+			"Name": "フォルダー 4 のコピー"
+		},
+		{
+			"Id": "Part66",
+			"Name": "頭 のコピー 2"
+		},
+		{
+			"Id": "Part26",
+			"Name": "頭 のコピー 2"
+		},
+		{
+			"Id": "Part31",
+			"Name": "右手 のコピー"
+		},
+		{
+			"Id": "Part32",
+			"Name": "上半 のコピー 2"
+		},
+		{
+			"Id": "Part35",
+			"Name": "脚 のコピー 2"
+		},
+		{
+			"Id": "Part34",
+			"Name": "左手 のコピー 2"
+		},
+		{
+			"Id": "Part23",
+			"Name": "エフェクト1"
+		},
+		{
+			"Id": "Part24",
+			"Name": "エフェクト2"
+		},
+		{
+			"Id": "Part12",
+			"Name": "右腕 のコピー"
+		},
+		{
+			"Id": "Part13",
+			"Name": "頭 のコピー"
+		},
+		{
+			"Id": "Part16",
+			"Name": "上半 のコピー"
+		},
+		{
+			"Id": "Part17",
+			"Name": "脚 のコピー"
+		},
+		{
+			"Id": "Part20",
+			"Name": "左手 のコピー"
+		},
+		{
+			"Id": "Part",
+			"Name": "眉"
+		},
+		{
+			"Id": "Part2",
+			"Name": "左腕"
+		},
+		{
+			"Id": "Part3",
+			"Name": "髪"
+		},
+		{
+			"Id": "Part4",
+			"Name": "顔"
+		},
+		{
+			"Id": "Part5",
+			"Name": "右腕"
+		},
+		{
+			"Id": "Part6",
+			"Name": "服"
+		},
+		{
+			"Id": "Part7",
+			"Name": "脚"
+		},
+		{
+			"Id": "Part10",
+			"Name": "髪後ろ"
+		},
+		{
+			"Id": "Part42",
+			"Name": "眉"
+		},
+		{
+			"Id": "Part43",
+			"Name": "髪"
+		},
+		{
+			"Id": "Part44",
+			"Name": "顔 のコピー 4"
+		},
+		{
+			"Id": "Part46",
+			"Name": "後ろ"
+		},
+		{
+			"Id": "Part51",
+			"Name": "左 のコピー 3"
+		},
+		{
+			"Id": "Part52",
+			"Name": "右 のコピー 3"
+		},
+		{
+			"Id": "Part55",
+			"Name": "眉 のコピー 2"
+		},
+		{
+			"Id": "Part56",
+			"Name": "髪 のコピー 3"
+		},
+		{
+			"Id": "Part57",
+			"Name": "顔 のコピー 3"
+		},
+		{
+			"Id": "Part58",
+			"Name": "後ろ のコピー 4"
+		},
+		{
+			"Id": "Part69",
+			"Name": "顔 のコピー 2"
+		},
+		{
+			"Id": "Part27",
+			"Name": "眉 のコピー"
+		},
+		{
+			"Id": "Part28",
+			"Name": "髪 のコピー 2"
+		},
+		{
+			"Id": "Part29",
+			"Name": "顔 のコピー 2"
+		},
+		{
+			"Id": "Part30",
+			"Name": "後ろ のコピー 2"
+		},
+		{
+			"Id": "Part36",
+			"Name": "右 のコピー 2"
+		},
+		{
+			"Id": "Part37",
+			"Name": "左 のコピー 2"
+		},
+		{
+			"Id": "Part14",
+			"Name": "髪 のコピー"
+		},
+		{
+			"Id": "Part15",
+			"Name": "顔 のコピー"
+		},
+		{
+			"Id": "Part25",
+			"Name": "靴"
+		},
+		{
+			"Id": "Part18",
+			"Name": "右足 のコピー"
+		},
+		{
+			"Id": "Part19",
+			"Name": "左足 のコピー"
+		},
+		{
+			"Id": "Part8",
+			"Name": "左"
+		},
+		{
+			"Id": "Part9",
+			"Name": "右"
+		},
+		{
+			"Id": "Part45",
+			"Name": "目"
+		}
+	],
+	"CombinedParameters": [
+		[
+			"Param15",
+			"Param16"
+		],
+		[
+			"Param21",
+			"Param22"
+		],
+		[
+			"Param25",
+			"Param24"
+		],
+		[
+			"Param27",
+			"Param28"
+		],
+		[
+			"ParamAngleX",
+			"ParamAngleY"
+		]
+	]
+}

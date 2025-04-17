@@ -34,3 +34,36 @@ public class ReadingNotes : MonoBehaviour
         noteTimeList.Value = GenerateNoteData();
     }
 }
+namespace RhythmGameScene
+{
+    public class ReadingNote
+    {
+        private string bgmPath = "";
+        public ReadingNote(string path)
+        {
+            bgmPath = path;
+        }
+        [System.Serializable]
+        public struct Note
+        {
+            public float timing;
+        }
+        public struct NotesData
+        {
+            public List<Note> Notes;
+        }
+        public List<float> GenerateNoteData()
+        {
+            List<float> notes = new List<float>();
+            bgmPath = Path.Combine(Application.streamingAssetsPath, bgmPath);
+            string json = File.ReadAllText(bgmPath);
+            NotesData notesData = JsonUtility.FromJson<NotesData>(json);
+            for (int i = 0; i < notesData.Notes.Count; i++)
+            {
+                var noteTime = notesData.Notes[i].timing;
+                notes.Add(noteTime);
+            }
+            return notes;
+        }
+    }
+}

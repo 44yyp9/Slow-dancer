@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Notes
   - KeyBord
+  - Ground
+  - Goal
   layers:
   - Default
   - TransparentFX

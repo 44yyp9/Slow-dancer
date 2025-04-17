@@ -1,18 +1,54 @@
 @startuml RhythmGameSceneArchitecture
 namespace Main{
 namespace RhythmGame {
-    namespace Model{
         class ReadingNotes{
             -struct Note{+float time}
             -struct NoteData{List<Note> notes}
             +List<float> notesTime()
             }
+        interface IUpdateable{
+            +void update()
+        }
+        class NoteUpdater{
+            -ReadingNotes readingNotes
+            -NotesObjectPool notesObjectPool
+            -NotesHitter notesHitter
+            -NotesHitterView notesHitterView
+            +void updateNotes()
+        }
+        class NoteGeneratorManeger{
+            -ReadingNotes readingNotes
+            -NotesObjectPool notesObjectPool
+            +void generateNotes()
+        }
+        class NotesObjectPool{
+            -GameObject notePrefab
+            -NoteInputHandler noteInputHandler
+            -NoteHitterPresenter noteHitterPresenter
+            -int noteCount
+            -List<GameObject> notes
+            +void createPool()
+            +void setNotes()
+            //二組のノーツの削除
+            +void RealseNotes()
+            +voihd AllRealseNotes()
+        }
+        class NoteInputHandler{
+            -KeyCode keyCode
+            +bool input()
+        }
+        NotesObjectPool -down-> NoteInputHandler
         class NotesHitter{
             //もしかしたら
-            //pure C#でいけるかも
+            +void miss()
+            +void hit()
             +Combo combo
             +string judgment
             +void hit(Note note)
+        }
+        class NoteMovingModel{
+            -float noteLength
+            +void move()
         }
         class Combo{
             //pure C#でいける
@@ -22,99 +58,197 @@ namespace RhythmGame {
             +void resetCombo()
             +bool isCombo()
         }
-    }
-    namespace Presenter{
-        class NotesGeneratePresenter{
-            ReadingNotes readingNotes
-            NotesGenerateView notesGenerateView
+        class NoteView{
+            +show()
+            +hide()
+        }
+        class NoteHitterPresenter{
+            -NotesHitterModel _model
+            -NotesHitter _hitter
+            -NoteView _view
             +void subscribe()
         }
-        class NotesHitterPresenter{
-            NotesHitter notesHitter
-            NotesHitterView notesHitterView
-            +void subscribe()
-        }
-        class NoteMovingPresenter{
-            NoteMovingView noteMovingView
-            NotesHitter notesHitter
-            +void subscribe()
-        }
-    }
-    namespace View{
-        class NotesGenerateView{
-            +GameObject notePrefab
-            +void generateNotes()
-            -IEnumerator generateNotesCoroutine()
-        }
-        class NotesHitterView{
-            -GameObject nearNotes
-            +void findNearNotes()
-            +void miss()
-            +void hit()
+        class NotesHitterModel{
+            //MonoBehaviourを継承している
+            //そうすることで楽に実装する            
+            -NotesHitter notesHitter
+            -NoteMovingModel noteMovingModel
+            -float Notelength
+            -bool isSamePosition()
             +void destroyNote()
         }
-        interface JudgmentintHit{
-            +void hit()
-            +void miss()
-        }
-        class NoteMovingView{
-            +Transform notePosition
-            +void move()
-            +void onThrouth()
-            +void destroy()
-        }
-        NotesHitterView .right.> JudgmentintHit
-    }
+        NoteHitterPresenter -down-> NotesHitterModel
+        NoteHitterPresenter -up-> NoteView
+        NoteHitterPresenter -down-> NotesHitter
+        NotesHitterModel -left-> NoteMovingModel
+        NotesObjectPool -left->NoteHitterPresenter
+        NoteHitterPresenter .up.> IUpdateable
+        NoteGeneratorManeger .up.> IUpdateable
+        IUpdateable -up-> NoteUpdater
+        NoteGeneratorManeger -down-> NotesObjectPool
+        NoteGeneratorManeger -down-> ReadingNotes
 }
-NotesGeneratePresenter -down-> ReadingNotes
-NotesGeneratePresenter -up-> NotesGenerateView
-NotesHitterPresenter -down-> NotesHitter
-NotesHitterPresenter -up-> NotesHitterView
-NoteMovingPresenter -up-> NoteMovingView
-NoteMovingPresenter -down-> NotesHitter
-NotesHitter -left-> Combo
+NotesHitter -down-> Combo
 
 namespace ActionGame {
     namespace Animations{
         namespace Player{
+            abstract class InputHandlerBase{
+                +bool input()
+            }
+            class InputJumpHandler{
+                -KeyCode KeyCode.Space
+                +bool input()
+            }
+            class InputFowardRunHandler{
+                -KeyCode KeyCode.LeftShift
+                +bool input()
+            }
+            class InputBackRunHandler{
+                -KeyCode KeyCode.LeftControl
+                +bool input()
+            }
+            class InputFowrdWalkHandler{
+                -KeyCode KeyCode.LeftControl
+                +bool input()
+            }
+            class InputBackWalkHandler{
+                -KeyCode KeyCode.LeftShift
+                +bool input()
+            }
+            class InputDiagonalDownJumpHandler{
+                -KeyCode KeyCode.LeftAlt
+                +bool input()
+            }
+            class InputDiagonalUpJumpHandler{
+                -KeyCode KeyCode.Space
+                +bool input()
+            }
+            class InputAttackHandler{
+                -KeyCode KeyCode.l
+                +bool input()
+            }
+            InputAttackHandler .up.> InputHandlerBase
+            InputJumpHandler .up.> InputHandlerBase
+            InputFowardRunHandler .up.> InputHandlerBase
+            InputBackRunHandler .left.> InputHandlerBase
+            InputFowrdWalkHandler .right.> InputHandlerBase
+            InputBackWalkHandler .down.> InputHandlerBase
+            InputDiagonalDownJumpHandler .down.> InputHandlerBase
+            InputDiagonalUpJumpHandler .down.> InputHandlerBase
             class PlayerAnimationManeger{
                 -Animator animator
-                IPauseable iPauseable
-                PlayerHP playerHP
-                IConectCurrentCombo iConectCurrentCombo
-                void transformPosition()
-                void stopAnimation()
+                -ComboSender comboSender
+                -PlayerHPSender playerHPSender
+                +PlayerTag playerTag
+                //stopはシングルトンなのでアクセスは簡単
+                +void stopAnimation()
+                +bool isCombo()
+                +void isTag(PlayerTag playerTag)
+                +void gameOver()
+                +void gameClear()
+            }
+            enum PlayerTag{
+                Attacking,
+                Damageing,
+                Normal
+            }
+            PlayerAnimationManeger -->PlayerTag
+            interface IAnimation{
+                +void nextAnimetion()
             }
             class IdleAnimation{
+                -playerAnimationManeger playerAnimationManeger
                 +void idle()
+                +void nextAnimetion()
             }
-            class RunAnimation{
-                +void startRun()
+            class RunForwardAnimation{
+                -playerAnimationManeger playerAnimationManeger
                 +void run()
+                +void nextAnimetion()
             }
-            class WalkAnimation{
-                +void startWalk()
+            class RunBackAnimation{
+                -playerAnimationManeger playerAnimationManeger
+                +void run()
+                +void nextAnimetion()
+            }
+            class MissRunAnimation{
+                -playerAnimationManeger playerAnimationManeger
+                +void missRun()
+                +void nextAnimetion()
+            }
+            class WalkForwardAnimation{
+                -playerAnimationManeger playerAnimationManeger
                 +void walk()
+                +void nextAnimetion()
+            }
+            class WalkBackAnimation{
+                -playerAnimationManeger playerAnimationManeger
+                +void walk()
+                +void nextAnimetion()
             }
             class JumpAnimation{
-                +void startJump()
+                -playerAnimationManeger playerAnimationManeger
                 +void jump()
                 +void takeOnGround()
+                +void nextAnimetion()
             }
-            class NormalAttackAnimation{
+            class SkyRunFowardAnimation{
+                -playerAnimationManeger playerAnimationManeger
+                +void skyRun()
+                +void nextAnimetion()
+            }
+            class MissSkyRunAnimation{
+                -playerAnimationManeger playerAnimationManeger
+                +void missSkyRun()
+                +void nextAnimetion()
+            }
+            class MissSkyRunAnimation{
+                -playerAnimationManeger playerAnimationManeger
+                +void missSkyRun()
+                +void nextAnimetion()
+            }
+            class DiagonalUpJumpAnimation{
+                -playerAnimationManeger playerAnimationManeger
+                +void diagonalUpJump()
+                +void takeOnGround()
+                +void nextAnimetion()
+            }
+            class DiagonalDownJumpAnimation{
+                -playerAnimationManeger playerAnimationManeger
+                +void diagonalDownJump()
+                +void takeOnGround()
+                +void nextAnimetion()
+            }
+            class AttackAnimation{
+                -playerAnimationManeger playerAnimationManeger
                 +int attakingPoint
                 +void attack()
+                +void nextAnimetion()
             }
-            class SpecialAttackAnimation{
+            class JumpAttackAnimation{
+                -playerAnimationManeger playerAnimationManeger
                 +int attakingPoint
                 +void specialAttack()
-            }
-            class TakingDamageAnimation{
-                +void damage()
+                +void nextAnimetion()
             }
             class DeadAnimation{
+                -playerAnimationManeger playerAnimationManeger
                 +void dead()
             }
+            IdleAnimation .up.> IAnimation
+            RunForwardAnimation .up.> IAnimation
+            RunBackAnimation .up.> IAnimation
+            MissRunAnimation .up.> IAnimation
+            WalkForwardAnimation .right.> IAnimation
+            WalkBackAnimation .right.> IAnimation
+            JumpAnimation .left.> IAnimation
+            SkyRunFowardAnimation .left.> IAnimation
+            MissSkyRunAnimation .down.> IAnimation
+            DiagonalUpJumpAnimation .down.> IAnimation
+            DiagonalDownJumpAnimation .down.> IAnimation
+            AttackAnimation .down.> IAnimation
+            JumpAttackAnimation .down.> IAnimation
         }
         note bottom of Player
         StateMachineBehaviour

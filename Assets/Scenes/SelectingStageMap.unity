@@ -375,19 +375,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1987919061522606938, guid: c95892c25a6e9e14f800d02001bbee0b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 450
+      value: 319.5
       objectReference: {fileID: 0}
     - target: {fileID: 1987919061522606938, guid: c95892c25a6e9e14f800d02001bbee0b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 500
+      value: 290
       objectReference: {fileID: 0}
     - target: {fileID: 1987919061522606938, guid: c95892c25a6e9e14f800d02001bbee0b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -749
+      value: -245.48
       objectReference: {fileID: 0}
     - target: {fileID: 1987919061522606938, guid: c95892c25a6e9e14f800d02001bbee0b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 88
+      value: -79.74001
       objectReference: {fileID: 0}
     - target: {fileID: 1987919061522606938, guid: c95892c25a6e9e14f800d02001bbee0b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -545,8 +545,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -734, y: 500}
-  m_SizeDelta: {x: 250, y: 125}
+  m_AnchoredPosition: {x: -234.78, y: 159}
+  m_SizeDelta: {x: 178.36, y: 72.43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &519820569
 MonoBehaviour:
@@ -672,8 +672,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -790.8, y: 450}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -275.3, y: 130.01999}
+  m_SizeDelta: {x: 114.15, y: 17.38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &576901380
 MonoBehaviour:
@@ -881,8 +881,8 @@ Transform:
   m_GameObject: {fileID: 731608820}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 144, y: 144, z: 144}
+  m_LocalPosition: {x: 288.88, y: -130.73001, z: 0}
+  m_LocalScale: {x: 102.24, y: 83.52, z: 144}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1493192367}
@@ -2064,8 +2064,8 @@ Transform:
   m_GameObject: {fileID: 1776336855}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -785, y: 160, z: 0}
-  m_LocalScale: {x: 250, y: 250, z: 144}
+  m_LocalPosition: {x: -271.16, y: -38.02001, z: 0}
+  m_LocalScale: {x: 177.5, y: 145, z: 144}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 75609972}
@@ -2272,11 +2272,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7224282552111564860, guid: 4bdc2b0baf5a9de4d8aa0ab8344d016e, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 114.15
       objectReference: {fileID: 0}
     - target: {fileID: 7224282552111564860, guid: 4bdc2b0baf5a9de4d8aa0ab8344d016e, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 17.38
       objectReference: {fileID: 0}
     - target: {fileID: 7224282552111564860, guid: 4bdc2b0baf5a9de4d8aa0ab8344d016e, type: 3}
       propertyPath: m_LocalScale.x
@@ -2316,11 +2316,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7224282552111564860, guid: 4bdc2b0baf5a9de4d8aa0ab8344d016e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -792
+      value: -276.16
       objectReference: {fileID: 0}
     - target: {fileID: 7224282552111564860, guid: 4bdc2b0baf5a9de4d8aa0ab8344d016e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 403
+      value: 102.789986
       objectReference: {fileID: 0}
     - target: {fileID: 7224282552111564860, guid: 4bdc2b0baf5a9de4d8aa0ab8344d016e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2606,7 +2606,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5435368546444777369, guid: 3d1f41286bd28254583208fda8d6236c, type: 3}
       propertyPath: m_Name
-      value: Stage1
+      value: TestStageScene3
       objectReference: {fileID: 0}
     - target: {fileID: 8815965612633931688, guid: 3d1f41286bd28254583208fda8d6236c, type: 3}
       propertyPath: m_LocalPosition.x

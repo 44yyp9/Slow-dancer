@@ -6,8 +6,9 @@ using static HitterType;
 
 public class NotesHitterView : MonoBehaviour,IJudgmentHitable
 {
+    //アニメーション入力でも用いるためstatic変数を用いる
     // ノーツが重なっているかのフラグ
-    private bool isOverlaping;
+    public static bool isOverlaping;
     //入力が入ったかのフラグ
     private bool isPushing;
     //一番近いノーツの検知
@@ -63,6 +64,10 @@ public class NotesHitterView : MonoBehaviour,IJudgmentHitable
     }
     private void Start()
     {
-        Observable.EveryUpdate().Where(_ => Input.GetKeyDown(KeyCode.Space)).Subscribe(_ => pushNote()).AddTo(this);
+        /*
+        var inputManeger = new InputPlayerManeger();
+        ServiceLocator.Register(inputManeger);
+        Observable.EveryUpdate().Do(_ =>inputManeger.updateInputs()).Where(_ => inputManeger.anyInput()).Subscribe(_ => pushNote()).AddTo(this);
+        */
     }
 }

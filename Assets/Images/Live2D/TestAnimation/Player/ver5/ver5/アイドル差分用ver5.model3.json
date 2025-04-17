@@ -1,0 +1,25 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "アイドル差分用ver5.moc3",
+		"Textures": [
+			"アイドル差分用ver5.1024/texture_00.png",
+			"アイドル差分用ver5.1024/texture_01.png",
+			"アイドル差分用ver5.1024/texture_02.png",
+			"アイドル差分用ver5.1024/texture_03.png"
+		],
+		"DisplayInfo": "アイドル差分用ver5.cdi3.json"
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": []
+		},
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		}
+	]
+}
